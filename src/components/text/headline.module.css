@@ -1,0 +1,41 @@
+.h1 {
+  font-size: var(--font-h1, 6rem);
+  line-height: var(--line-height-h1, 7rem);
+  min-height: var(--line-height-h1, 7rem);
+  font-weight: var(--font-weight-h1, 600);
+}
+
+.h2 {
+  font-size: var(--font-h2, 4.8rem);
+  line-height: var(--line-height-h2, 5.6rem);
+  min-height: var(--line-height-h2, 5.6rem);
+  font-weight: var(--font-weight-h2, 600);
+}
+
+.h3 {
+  font-size: var(--font-h3, 3.6rem);
+  line-height: var(--line-height-h3, 4.4rem);
+  min-height: var(--line-height-h3, 4.4rem);
+  font-weight: var(--font-weight-h3, 600);
+}
+
+.h4 {
+  font-size: var(--font-h4, 2.4rem);
+  line-height: var(--line-height-h4, 3.2rem);
+  min-height: var(--line-height-h4, 3.2rem);
+  font-weight: var(--font-weight-h4, 600);
+}
+
+.h5 {
+  font-size: var(--font-h5, 2rem);
+  line-height: var(--line-height-h5, 2.8rem);
+  min-height: var(--line-height-h5, 2.8rem);
+  font-weight: var(--font-weight-h5, 600);
+}
+
+.h6 {
+  font-size: var(--font-h6, 1.6rem);
+  line-height: var(--line-height-h6, 2.4rem);
+  min-height: var(--line-height-h6, 2.4rem);
+  font-weight: var(--font-weight-h6, 400);
+}

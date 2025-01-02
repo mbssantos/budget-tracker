@@ -1,0 +1,9 @@
+.articles {
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .articles {
+    width: 60%;
+  }
+}

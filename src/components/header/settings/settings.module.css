@@ -1,0 +1,11 @@
+.settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  padding: var(--spacing-24);
+  background: var(--background);
+
+  z-index: 100;
+  display: none;
+}

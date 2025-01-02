@@ -1,0 +1,38 @@
+.footer {
+  background-color: var(--color-2);
+  color: white;
+}
+
+.footerInner {
+  margin: 0 auto;
+  padding: var(--spacing-48) var(--spacing-24) var(--spacing-24);
+  max-width: var(--max-width);
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.footerContent > div {
+  text-align: center;
+}
+
+.headline {
+  text-align: center;
+  color: var(--color-2-font);
+  margin: var(--spacing-16);
+}
+
+@media (min-width: 768px) {
+  .footerContent {
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .headline {
+    margin: 0;
+  }
+}

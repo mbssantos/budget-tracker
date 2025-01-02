@@ -1,0 +1,38 @@
+{
+  "name": "budget-tracker.ecb.europa.eu",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@formatjs/intl-localematcher": "^0.5.8",
+    "@mui/icons-material": "^6.1.8",
+    "@mui/material": "^6.1.8",
+    "@next/third-parties": "^15.0.4",
+    "@slack/webhook": "^7.0.4",
+    "@types/negotiator": "^0.6.3",
+    "classnames": "^2.5.1",
+    "contentful": "^11.2.5",
+    "lodash": "^4.17.21",
+    "negotiator": "^1.0.0",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^15.0.3",
+    "@types/lodash": "^4.17.13",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "typescript": "^5"
+  }
+}

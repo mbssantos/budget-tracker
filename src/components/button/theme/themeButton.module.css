@@ -1,0 +1,32 @@
+.themeButton {
+  width: 100%;
+  display: flex;
+  white-space: nowrap;
+}
+
+.themeButton button {
+  border-radius: 0;
+  width: 100%;
+}
+
+.themeButton svg {
+  margin-right: 0.5rem;
+}
+
+.firstButton.firstButton {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.lastButton.lastButton {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.noRightBorder.noRightBorder {
+  border-right-color: transparent;
+}
+
+.noLeftBorder.noLeftBorder {
+  border-left-color: transparent;
+}

@@ -1,0 +1,13 @@
+.iconButton.iconButton {
+  padding: var(--spacing-8);
+}
+
+.label.label {
+  margin-left: var(--spacing-8);
+}
+
+@media (min-width: 768px) {
+  .iconButton.iconButton {
+    padding: var(--spacing-8) var(--spacing-16);
+  }
+}

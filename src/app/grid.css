@@ -1,0 +1,4 @@
+.grid {
+  margin: var(--spacing-48) auto;
+  max-width: var(--max-width);
+}

@@ -1,0 +1,85 @@
+{
+  "global": {
+    "articles": "Articles",
+    "budgetTracker": "Budget Tracker"
+  },
+  "home": {
+    "title": "Sample meta title.",
+    "description": "Sample meta description"
+  },
+  "contactUs": {
+    "title": "Contact us",
+    "description": "Get in touch with our team for feature request, questions, complaints or thank-you notes!"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Welcome to our platform, a project born from necessity and passion!",
+    "desc1": "Welcome to our platform, a project born from necessity and passion. When we were preparing for our hunting and firearm license exams, we found ourselves navigating a sea of outdated information, fragmented resources, and platforms that either no longer existed or were stuck in the past. The lack of a reliable, modern solution inspired us to take matters into our own hands.",
+    "desc2": "We created this website to simplify the journey for anyone preparing for these exams. Our goal is to offer an accessible, user-friendly platform where you can find everything you need in one place — from practice exams to up-to-date information tailored to the current requirements",
+    "desc3": "By offering these resources for free, we aim to ensure that no one else has to face the same frustrations we did. Whether you’re just starting out or refining your knowledge, we’re here to support you every step of the way.",
+    "desc4": "Thank you for trusting us to be part of your journey. Let’s make your preparation process as smooth and successful as possible!",
+    "desc5": "Have a message for us? Head over to our",
+    "desc5LinkLabel": "contact page",
+    "desc5LinkHref": "/en/contact-us",
+    "desc6": "Happy hunting"
+  },
+  "exam": {
+    "title": "Practice for your firearm and hunting license exam for free.",
+    "description": "Test your knowledge and ensure success with our official exam questions for Portugal's hunting and firearm licenses.",
+
+    "description2": "Test your knowledge and ensure success with our official exam questions for Portugal's <strong>hunting and firearm licenses</strong>.",
+    "description3": "We've developed Portugal's best online practice platform to ensure you succeed with flying colors - start practicing today!",
+
+    "description4": "If you have any questions, head over to our in-depth guides on ",
+    "description4link1href": "/en/articles/1d5gQvfi8E3TVRBZgPMNip-an-in-depth-guide-to-obtaining-a-hunting-license-in-portugal-as-a-portuguese-citizen",
+    "description4link1Label": "becoming a certified hunter",
+    "description4glue": " or on ",
+    "description4link2href": "/en/articles/31NuowKq35UX0fpmleTjDe-how-to-obtain-a-firearm-license-a-comprehensive-guide",
+    "description4link2Label": "how to get a firearm license"
+  },
+  "psp": {
+    "title": "Practice for your firearm license exam for free.",
+    "description": "Test your knowledge and ensure success with our official exam questions."
+  },
+  "icnf": {
+    "title": "Practice for your hunting license exam for free.",
+    "description": "Test your knowledge and ensure success with our official exam questions."
+  },
+  "articles": {
+    "title": "Our latest articles",
+    "description": "All the latest news in Portugal's hunting scene"
+  },
+  "icnfExamPage": {
+    "title": "Hunting license practice exam",
+    "description": "Test your knowledge and ensure success with our official exam questions."
+  },
+  "icnfExamPassedPage": {
+    "title": "Hunting license exam review",
+    "description": "Review your knowledge and ensure success with our official exam questions."
+  },
+  "lupaExamPage": {
+    "title": "Firearm license practice exam",
+    "description": "Test your knowledge and ensure success with our official exam questions."
+  },
+  "lupaExamPassedPage": {
+    "title": "Firearm license exam review",
+    "description": "Review your knowledge and ensure success with our official exam questions."
+  },
+  "resources": {
+    "headline": "External resources",
+    "cards": [
+      {
+        "headline": "Firearm license exam manual",
+        "description": "Study manual for firearm licenses (Category C and D)."
+      },
+      {
+        "headline": "Firearm exam simulator",
+        "description": "The police's official exam simulator for all category types."
+      },
+      {
+        "headline": "All hunting license questions",
+        "description": "ICNF's official document, listing all possible exam questions."
+      }
+    ]
+  }
+}

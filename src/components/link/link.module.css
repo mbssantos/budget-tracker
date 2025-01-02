@@ -1,0 +1,8 @@
+.link > span {
+  border-bottom: 1px solid var(--color-2);
+  transition: border 250ms linear;
+}
+
+.link > span:hover {
+  border-bottom-color: inherit;
+}

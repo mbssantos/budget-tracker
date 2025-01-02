@@ -1,0 +1,132 @@
+:root,
+:root.light {
+  --background: #fafafa;
+  --background-white: #ededed;
+  --backgroundTransparent: #ffffff50;
+  --foreground: #0f1214;
+
+  --red-border: #a80000;
+  --red-bcg: #a8000050;
+
+  --green-border: #0f760f;
+  --green-bcg: #0f760f50;
+  --green-overlay: #0f760f;
+
+  --max-width: 1440px;
+
+  --color-1: #e64c2d;
+  --color-1-alt: #e64c2d;
+  --color-1-hover: #a73923;
+  --color-1-alt-hover: #a73923;
+  --color-1-border: #ff6e51;
+
+  --color-2: rgb(70, 93, 80);
+  --color-2-font: rgb(123, 166, 142);
+
+  --font-color-white: #ededed;
+  --font-weight-text-1: 400;
+
+  --box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 15%);
+  --box-shadow-alt: 0 2px 6px 0 rgba(0, 0, 0, 55%);
+
+  --spacing-8: 0.8rem;
+  --spacing-16: 1.6rem;
+  --spacing-24: 2.4rem;
+  --spacing-48: 4.8rem;
+
+  --border-color: rgb(29, 33, 38);
+  --border-color-high-contrast: rgb(29, 33, 38);
+  --border-radius: 4px;
+}
+
+body {
+  color-scheme: light;
+}
+
+html.light body {
+  color-scheme: light;
+}
+
+html.dark body {
+  color-scheme: dark;
+}
+
+html.dark img,
+html.dark video {
+  filter: brightness(0.8) contrast(1.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color-scheme: dark;
+  }
+
+  video,
+  img {
+    filter: brightness(0.8) contrast(1.2);
+  }
+
+  .light video,
+  .light img {
+    filter: brightness(1) contrast(1);
+  }
+
+  :root {
+    --background: #0f1214;
+    --background-white: #ededed;
+    --backgroundTransparent: #0f121450;
+    --foreground: #ededed;
+
+    --hover: rgba(48, 56, 64, 0.2);
+
+    --color-1-alt: #360f08;
+    --color-1-alt-hover: #6b2719;
+
+    --red-border: #4e0000;
+    --red-bcg: #700000;
+
+    --green-bcg: #004600;
+    --green-border: #004500;
+    --green-overlay: #ededed;
+
+    --font-color-white: #ededed;
+    --box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 100%);
+
+    --border-color-high-contrast: var(--foreground);
+  }
+}
+
+.dark {
+  &:root {
+    --background: #0f1214;
+    --background-white: #ededed;
+    --backgroundTransparent: #0f121450;
+    --foreground: #ededed;
+
+    --hover: rgba(48, 56, 64, 0.2);
+
+    --color-1-alt: #360f08;
+    --color-1-alt-hover: #6b2719;
+
+    --red-border: #4e0000;
+    --red-bcg: #700000;
+
+    --green-bcg: #004600;
+    --green-border: #004500;
+    --green-overlay: #ededed;
+
+    --font-color-white: #ededed;
+    --box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 100%);
+    --box-shadow-alt: 0 2px 6px 0 rgba(0, 0, 0, 55%);
+  }
+
+  video,
+  img {
+    filter: brightness(0.8) contrast(1.2);
+  }
+
+  .light video,
+  .light img {
+    filter: brightness(1) contrast(1);
+  }
+}

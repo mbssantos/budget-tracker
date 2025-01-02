@@ -1,0 +1,29 @@
+.cardList > * {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .cardList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 640px) {
+  .cardList > * {
+    width: 50%;
+  }
+}
+
+@media (min-width: 960px) {
+  .cardList > * {
+    width: 33%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .cardList > * {
+    width: 25%;
+  }
+}

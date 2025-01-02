@@ -1,0 +1,7 @@
+.select {
+  border: 0;
+  border-bottom: 2px solid var(--border-color-high-contrast);
+  padding: var(--spacing-8);
+  background: transparent;
+  appearance: none;
+}

@@ -1,0 +1,59 @@
+.text svg:first-child {
+  margin-right: 1rem;
+}
+
+p.text {
+  margin: var(--spacing-16) 0;
+}
+
+.text {
+  word-break: break-word;
+  font-weight: var(--font-weight-text-1);
+}
+
+.center {
+  display: block;
+  text-align: center;
+}
+
+.size1 {
+  font-size: var(--font-size-text-1, 2.4rem);
+  line-height: var(--line-height-text-1, 3rem);
+  min-height: var(--line-height-text-1, 3rem);
+}
+
+.size2 {
+  font-size: var(--font-size-text-2, 2rem);
+  line-height: var(--line-height-text-2, 2.8rem);
+  min-height: var(--line-height-text-2, 2.8rem);
+}
+
+.size3 {
+  font-size: var(--font-size-text-3, 1.8rem);
+  line-height: var(--line-height-text-3, 2.4rem);
+  min-height: var(--line-height-text-3, 2.4rem);
+}
+
+.size4 {
+  font-size: var(--font-size-text-4, 1.6rem);
+  line-height: var(--line-height-text-4, 2.4rem);
+  min-height: var(--line-height-text-4, 2.4rem);
+}
+
+.size5 {
+  font-size: var(--font-size-text-5, 1.4rem);
+  line-height: var(--line-height-text-5, 2.2rem);
+  min-height: var(--line-height-text-5, 2.2rem);
+}
+
+.size6 {
+  font-size: var(--font-size-text-6, 1.2rem);
+  line-height: var(--line-height-text-6, 1.6rem);
+  min-height: var(--line-height-text-6, 1.6rem);
+}
+
+.size7 {
+  font-size: var(--font-size-text-7, 1rem);
+  line-height: var(--line-height-text-7, 1.8rem);
+  min-height: var(--line-height-text-7, 1.8rem);
+}

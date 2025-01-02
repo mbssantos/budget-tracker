@@ -1,0 +1,30 @@
+.nav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .nav.isOpen {
+    display: block;
+    position: absolute;
+
+    width: 100%;
+    min-height: 100vh;
+    z-index: 100;
+    top: 100%;
+    left: 0;
+    background: var(--background);
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+@media (min-width: 768px) {
+  .nav {
+    flex: 1;
+    display: block;
+    margin-left: var(--spacing-48);
+  }
+
+  .menuButton.menuButton {
+    display: none;
+  }
+}
