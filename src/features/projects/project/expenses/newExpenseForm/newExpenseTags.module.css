@@ -40,7 +40,7 @@
 }
 
 .autocomplete > *:hover {
-  cursor: pointer;
+  cursor: default;
   background-color: var(--background-alt);
 }
 

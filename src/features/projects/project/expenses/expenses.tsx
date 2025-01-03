@@ -1,9 +1,8 @@
 import Message from "@/components/message/message";
 import { Headline, Text } from "@/components/text";
-import { ChangeEventHandler } from "react";
 import { Project } from "../../types";
 import styles from "./expenses.module.css";
-import NewExpenseForm from "./newExpenseForm";
+import { NewExpenseForm } from "./newExpenseForm";
 
 type ProjectExpensesProps = {
   project: Project;
@@ -12,11 +11,6 @@ type ProjectExpensesProps = {
 
 const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
   const { id, expenses = [] } = project;
-
-  const handleExpensesChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    // ProjectService.upsert(id, { expenses: {} });
-    onChange();
-  };
 
   return (
     <div className={styles.expenses}>
@@ -31,11 +25,13 @@ const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
         </Message>
       )}
 
-      {expenses?.map((expense, index) => (
-        <div>expense</div>
+      {expenses?.map((expense) => (
+        <div key={expense.id}>
+          <Text>{expense.name}</Text>
+        </div>
       ))}
 
-      <NewExpenseForm />
+      <NewExpenseForm pid={id} onChange={onChange} />
     </div>
   );
 };

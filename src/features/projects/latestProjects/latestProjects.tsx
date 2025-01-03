@@ -3,9 +3,9 @@
 import { Button } from "@/components/button";
 import { CardList } from "@/components/cardList";
 import { Link } from "@/components/link";
+import Message from "@/components/message/message";
 import { Headline, Text } from "@/components/text";
 import useLocale from "@/hooks/useLocale";
-import { Warning } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import ProjectService from "../projectsService";
 import { Project } from "../types";
@@ -23,14 +23,21 @@ const LatestProjects = () => {
   return (
     <section className={styles.myProjectsWrapper}>
       <div className={styles.myProjects}>
-        <Headline level={2}>My Latest Projects</Headline>
+        <div className="m-16">
+          <Headline className="center" level={2}>
+            My Latest Projects
+          </Headline>
 
-        <div className="m-t-24">
           {projects.length === 0 && (
-            <Text>
-              <Warning />
-              No projects found. Click the button below to get started.
-            </Text>
+            <div className="center">
+              <div className={styles.messageWrapper}>
+                <Message>
+                  <Text>
+                    No projects found. Click the button below to get started.
+                  </Text>
+                </Message>
+              </div>
+            </div>
           )}
 
           <CardList>

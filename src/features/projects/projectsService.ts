@@ -1,3 +1,4 @@
+import { encode } from "@/utils/base64";
 import { LocalStorageService } from "@/utils/localStorageService";
 import { CreateProject, Expense, Project } from "./types";
 
@@ -11,7 +12,7 @@ const lss = new LocalStorageService<Project>(LOCAL_STORAGE_KEY);
  * Handles specific logic related to projects like setting defaults and handling updates
  */
 const ProjectService = {
-  addExpense(id: string, expense: Expense) {
+  addExpense(id: string, expense: Omit<Expense, "id">) {
     // get latest data from storage
     const project = lss.getById(id);
 
@@ -21,7 +22,7 @@ const ProjectService = {
     }
 
     // add expense to project
-    project.expenses.push(expense);
+    project.expenses.push({ id: encode(`${Math.random()}`), ...expense });
 
     // save project changes
     ProjectService.upsert(id, project);

@@ -1,7 +1,12 @@
+import { Tag } from "../tags/types";
+
 export type ExpenseSource = "Thing";
 
 export type Expense = {
-  source: ExpenseSource;
+  id: string;
+  tags: Tag[];
+  name: string;
+  date: number;
   amount: number;
 };
 

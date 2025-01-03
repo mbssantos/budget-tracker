@@ -28,8 +28,8 @@ export default function NewProjectPage({}: PageProps) {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    const entry = ProjectService.create({ title: title.trim(), budget });
-    router.push(`/${locale}/projects/${entry.id}`);
+    const [{ id }] = ProjectService.create({ title: title.trim(), budget });
+    router.push(`/${locale}/projects/${id}`);
   };
 
   return (

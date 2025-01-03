@@ -49,7 +49,7 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
     // blur to hide autocomplete
     e?.currentTarget?.blur?.();
 
-    // crate new user tag
+    // create new user tag
     const [newTag] = TagService.create(tag);
 
     // clear input
@@ -60,7 +60,7 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
   };
 
   return (
-    <form className={styles.newExpenseTags}>
+    <div className={styles.newExpenseTags}>
       <div className={styles.newExpenseTagsInput}>
         <Text Tag="label">
           Tags
@@ -99,28 +99,30 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
 
             {suggestions.length === 0 && tag.length > 0 && (
               <div tabIndex={0} onClick={handleCreateTag}>
-                <Text>Crate tag "{tag}"</Text>
+                <Text>Crate tag &quot;{tag}&quot;</Text>
               </div>
             )}
           </div>
         </div>
       </div>
 
-      <div className={styles.tagList}>
-        {tags.map((tag) => (
-          <button
-            key={tag.id}
-            className={styles.removeTagButton}
-            onClick={onRemove.bind(null, tag)}
-          >
-            <Text>
-              {tag.label}
-              <Close />
-            </Text>
-          </button>
-        ))}
-      </div>
-    </form>
+      {tags.length > 0 && (
+        <div className={styles.tagList}>
+          {tags.map((tag) => (
+            <button
+              key={tag.id}
+              className={styles.removeTagButton}
+              onClick={onRemove.bind(null, tag)}
+            >
+              <Text>
+                {tag.label}
+                <Close />
+              </Text>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

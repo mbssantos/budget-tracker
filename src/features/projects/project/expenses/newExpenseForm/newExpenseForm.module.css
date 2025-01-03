@@ -9,7 +9,8 @@ form.newExpenseForm h3 {
 }
 
 .buttonWrapper {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
 }
 
 .twoInputs {

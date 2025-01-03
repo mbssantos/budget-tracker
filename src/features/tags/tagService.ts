@@ -9,12 +9,10 @@ const defaultTags: Tag[] = proposedTags.map((label) => ({
   createdAt: Date.now(),
 }));
 
-defaultTags.push;
-
 const LOCAL_STORAGE_KEY = "tags";
 
 // Shallow copy defaults
-let lss = new LocalStorageService<Tag>(LOCAL_STORAGE_KEY);
+const lss = new LocalStorageService<Tag>(LOCAL_STORAGE_KEY);
 
 // if we're browse-side and add the list does not exist, add the default items
 if (typeof window !== "undefined" && !lss.exists()) {
