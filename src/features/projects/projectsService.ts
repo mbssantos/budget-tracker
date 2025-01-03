@@ -12,6 +12,20 @@ const lss = new LocalStorageService<Project>(LOCAL_STORAGE_KEY);
  * Handles specific logic related to projects like setting defaults and handling updates
  */
 const ProjectService = {
+  /**
+   * Calculates the remaining budget a project has
+   *
+   * @param project the project to calculate the budget for
+   * @returns
+   */
+  getRemainingBudget(project: Project) {
+    const { budget, expenses } = project;
+
+    return expenses.reduce((acc, expense) => {
+      return acc - expense.amount;
+    }, budget);
+  },
+
   addExpense(id: string, expense: Omit<Expense, "id">) {
     // get latest data from storage
     const project = lss.getById(id);
@@ -22,7 +36,13 @@ const ProjectService = {
     }
 
     // add expense to project
-    project.expenses.push({ id: encode(`${Math.random()}`), ...expense });
+    project.expenses.push({
+      id: encode(`${Math.random()}`),
+      ...expense,
+    });
+
+    // cache remaining for quick access
+    project.remainingBudget = ProjectService.getRemainingBudget(project);
 
     // save project changes
     ProjectService.upsert(id, project);
@@ -37,6 +57,7 @@ const ProjectService = {
       ...data,
       expenses: [],
       revenues: [],
+      remainingBudget: data.budget,
     });
   },
 

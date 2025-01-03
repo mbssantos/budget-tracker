@@ -24,6 +24,7 @@ export type Project = {
   id: string;
   title: string;
   budget: number;
+  remainingBudget: number;
   createdAt: number;
   expenses: Expense[];
   revenues: Revenue[];

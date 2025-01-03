@@ -1,6 +1,6 @@
-import Message from "@/components/message/message";
-import { Headline, Text } from "@/components/text";
+import { Headline } from "@/components/text";
 import { Project } from "../../types";
+import { ExpenseList } from "./expenseList";
 import styles from "./expenses.module.css";
 import { NewExpenseForm } from "./newExpenseForm";
 
@@ -9,29 +9,18 @@ type ProjectExpensesProps = {
   onChange: () => void;
 };
 
+/**
+ * Wrapper component around Expenses functionality
+ *
+ * @param param0
+ * @returns
+ */
 const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
-  const { id, expenses = [] } = project;
-
   return (
     <div className={styles.expenses}>
       <Headline level={2}>Expenses</Headline>
-
-      {expenses.length === 0 && (
-        <Message>
-          <Text>
-            No expenses to display. Start by adding a new expense using the form
-            below.
-          </Text>
-        </Message>
-      )}
-
-      {expenses?.map((expense) => (
-        <div key={expense.id}>
-          <Text>{expense.name}</Text>
-        </div>
-      ))}
-
-      <NewExpenseForm pid={id} onChange={onChange} />
+      <ExpenseList project={project} onChange={onChange} />
+      <NewExpenseForm pid={project.id} onChange={onChange} />
     </div>
   );
 };

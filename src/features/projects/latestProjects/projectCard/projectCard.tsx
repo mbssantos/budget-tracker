@@ -6,10 +6,15 @@ import { Project } from "../../types";
 import styles from "./projectCard.module.css";
 
 const ProjectCard: React.FC<Project> = (project) => {
-  const { id, title } = project;
+  const { id, title, remainingBudget, budget } = project;
   const locale = useLocale();
 
-  const remainingPercentage = 50;
+  const usedBudgetPercentage = Math.round(
+    100 - (remainingBudget / Math.max(budget, 1)) * 100
+  );
+
+  // cap progress bar width
+  const widthPercentage = Math.min(usedBudgetPercentage, 100);
 
   return (
     <div className={styles.projectCardWrapper}>
@@ -24,9 +29,9 @@ const ProjectCard: React.FC<Project> = (project) => {
           <div className={styles.budget}>
             <div
               className={styles.budgetPercentage}
-              style={{ width: `${remainingPercentage}%` }}
+              style={{ width: `${widthPercentage}%` }}
             ></div>
-            <Text size={5}>{remainingPercentage}% budget left</Text>
+            <Text size={5}>{usedBudgetPercentage}% budget used</Text>
           </div>
         </Link>
       </div>

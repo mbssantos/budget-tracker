@@ -28,7 +28,7 @@ const Footer: React.FC<WithLocale> = ({ locale }) => {
       <div className={styles.footerInner}>
         <div className={styles.footerContent}>
           <Headline level={4} size={5}>
-            {keys.contactUs}
+            Hi, I&apos;m a footer.
           </Headline>
           <div>
             <Headline level={6} className={styles.headline}>
