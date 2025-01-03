@@ -26,13 +26,18 @@ const ProjectService = {
     }, budget);
   },
 
-  addExpense(id: string, expense: Omit<Expense, "id">) {
+  /**
+   *
+   * @param pid project ID
+   * @param expense the expense to add
+   */
+  addExpense(pid: string, expense: Omit<Expense, "id">) {
     // get latest data from storage
-    const project = lss.getById(id);
+    const project = lss.getById(pid);
 
     if (!project) {
       // todo: handle error in the UI
-      throw new Error(`Project with id ${id} not found`);
+      throw new Error(`Project with id ${pid} not found`);
     }
 
     // add expense to project
@@ -41,11 +46,68 @@ const ProjectService = {
       ...expense,
     });
 
+    // sort expenses by due date
+    project.expenses = project.expenses.sort((a, b) => a.dueDate - b.dueDate);
+
     // cache remaining for quick access
     project.remainingBudget = ProjectService.getRemainingBudget(project);
 
     // save project changes
-    ProjectService.upsert(id, project);
+    ProjectService.upsert(pid, project);
+  },
+
+  /**
+   * update an existing expense
+   *
+   * @param pid Project Id
+   * @param expense the new expense
+   */
+  updateExpense(pid: string, expense: Expense) {
+    // get latest data from storage
+    const project = lss.getById(pid);
+
+    if (!project) {
+      // todo: handle error in the UI
+      throw new Error(`Project with id ${pid} not found`);
+    }
+
+    const { id: eid } = expense;
+    const expenseIndex = project.expenses.findIndex(({ id }) => eid === id);
+
+    console.log({ eid, expenseIndex });
+
+    if (expenseIndex >= 0) {
+      // update item
+      project.expenses[expenseIndex] = expense;
+    }
+
+    // save project
+    lss.upsert(pid, project);
+  },
+
+  /**
+   * Remove an expense from the project
+   *
+   * @param pid Project Id
+   * @param eid Expense Id
+   */
+  removeExpense(pid: string, eid: string) {
+    // get latest data from storage
+    const project = lss.getById(pid);
+
+    if (!project) {
+      // todo: handle error in the UI
+      throw new Error(`Project with id ${pid} not found`);
+    }
+
+    const expenseIndex = project.expenses.findIndex(({ id }) => eid === id);
+    if (expenseIndex >= 0) {
+      // remove from array
+      project.expenses.splice(expenseIndex, 1);
+    }
+
+    // save project
+    lss.upsert(pid, project);
   },
 
   upsert(id: string, delta: Partial<Project>) {

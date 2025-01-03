@@ -36,13 +36,13 @@ const Project: React.FC<ProjectProps> = ({ id }) => {
   }
 
   return (
-    <section>
+    <section className="mw-full">
       <Headline className="center m-t-48 m-b-24" level={2}>
         {project.title}
       </Headline>
 
       <div className="m-16">
-        <div className="mw-68 m-0a">
+        <div className="m-0a">
           <Budget project={project} onChange={fetchProject} />
           <Expenses project={project} onChange={fetchProject} />
         </div>

@@ -39,7 +39,7 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
     ProjectService.addExpense(pid, {
       name,
       amount,
-      date: new Date(date).getTime(),
+      dueDate: new Date(date).getTime(),
       tags,
     });
 
@@ -76,27 +76,25 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
           onChange={inputHandler(setName)}
         />
       </Text>
-      <div className={styles.twoInputs}>
-        <Text Tag="label">
-          Amount
-          <input
-            min={0}
-            type="number"
-            placeholder="Amount expended"
-            value={amount}
-            onChange={inputHandlerNumber(setAmount)}
-          />
-        </Text>
-        <Text Tag="label">
-          Date
-          <input
-            required
-            type="date"
-            value={date}
-            onChange={inputHandler(setDate)}
-          />
-        </Text>
-      </div>
+      <Text Tag="label">
+        Amount
+        <input
+          min={0}
+          type="number"
+          placeholder="Amount expended"
+          value={amount}
+          onChange={inputHandlerNumber(setAmount)}
+        />
+      </Text>
+      <Text Tag="label">
+        Due date
+        <input
+          required
+          type="date"
+          value={date}
+          onChange={inputHandler(setDate)}
+        />
+      </Text>
 
       <NewExpenseTags
         tags={tags}

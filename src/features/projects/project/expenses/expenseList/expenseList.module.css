@@ -1,3 +1,44 @@
 .expenseList {
-  padding: var(--spacing-16);
+  margin: var(--spacing-24) 0;
+}
+
+/* allow smooth scrolling on mobile */
+.tableWrapper {
+  overflow: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  box-shadow: var(--box-shadow-alt);
+}
+
+.tableWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.expenseList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expenseList th {
+  white-space: nowrap;
+  background-color: var(--background-alt);
+  padding: var(--spacing-24);
+  text-align: left;
+}
+
+.expenseList th,
+.expenseList td {
+  border: 1px solid var(--border-color);
+}
+
+.expenseList td {
+  padding: var(--spacing-8) var(--spacing-24);
+  vertical-align: middle;
+}
+
+.expenseList input[type="checkbox"] {
+  cursor: pointer;
+  border: 0px;
+  width: 2rem;
+  height: 2em;
 }

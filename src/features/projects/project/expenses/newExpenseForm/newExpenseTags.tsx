@@ -65,7 +65,7 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
         <Text Tag="label">
           Tags
           <input
-            type="string"
+            type="text"
             value={tag}
             className={styles.input}
             onChange={inputHandler(setTag)}

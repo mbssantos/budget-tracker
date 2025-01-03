@@ -8,24 +8,13 @@ form.newExpenseForm h3 {
   margin-bottom: var(--spacing-24);
 }
 
+form.newExpenseForm > label {
+  display: inline-block;
+  margin: 0 var(--spacing-8);
+}
+
 .buttonWrapper {
+  margin-top: var(--spacing-24);
   display: flex;
   justify-content: space-between;
-}
-
-.twoInputs {
-  display: flex;
-  align-items: center;
-}
-
-.twoInputs > * {
-  flex: 1;
-}
-
-.twoInputs > *:first-child {
-  margin-right: var(--spacing-8);
-}
-
-.twoInputs > *:last-child {
-  margin-left: var(--spacing-8);
 }

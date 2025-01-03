@@ -6,8 +6,10 @@ export type Expense = {
   id: string;
   tags: Tag[];
   name: string;
-  date: number;
+  dueDate: number;
   amount: number;
+  isPayed: boolean;
+  // Note: Adding a payed date would probably make sense for tracking
 };
 
 export type Revenue = {

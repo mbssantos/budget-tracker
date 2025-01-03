@@ -51,6 +51,11 @@ option {
   fill: currentColor;
 }
 
+.mw-full.mw-full {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
 .mw-68.mw-68 {
   max-width: 68rem;
 }
@@ -109,7 +114,6 @@ svg.MuiSvgIcon-root.MuiSvgIcon-root {
 }
 
 form {
-  max-width: 68rem;
   margin: var(--spacing-24) auto var(--spacing-48);
 }
 
@@ -117,7 +121,10 @@ label {
   display: block;
 }
 
-input,
+input[type=""],
+input[type="text"],
+input[type="date"],
+input[type="number"],
 textarea {
   width: 100%;
   display: block;
