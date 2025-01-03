@@ -48,7 +48,7 @@ export default function NewProjectPage({}: PageProps) {
         </Text>
 
         <Text Tag="label">
-          Budget
+          Initial budget
           <input
             min={0}
             required

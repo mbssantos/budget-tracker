@@ -43,6 +43,18 @@ const ProjectService = {
     return lss.getAllAsArray();
   },
 
+  /**
+   * Mocks an API call to fetch the latest projects
+   *
+   * @returns
+   */
+  getLatest(count = 5) {
+    const allProjects = lss.getAllAsArray();
+    return allProjects
+      .sort((a, b) => b.createdAt - a.createdAt)
+      .slice(0, count);
+  },
+
   getById(id: string) {
     return lss.getById(id);
   },

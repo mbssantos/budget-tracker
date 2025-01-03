@@ -1,0 +1,9 @@
+.myProjectsWrapper {
+  background-color: var(--background-alt);
+  padding: var(--spacing-48) 0;
+}
+
+.myProjects {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}

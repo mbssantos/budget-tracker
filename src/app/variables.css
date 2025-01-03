@@ -1,6 +1,7 @@
 :root,
 :root.light {
   --background: #fafafa;
+  --background-alt: #f0f0f0;
   --background-white: #ededed;
   --backgroundTransparent: #ffffff50;
   --foreground: #0f1214;
@@ -73,6 +74,7 @@ html.dark video {
 
   :root {
     --background: #0f1214;
+    --background-alt: #13171a;
     --background-white: #ededed;
     --backgroundTransparent: #0f121450;
     --foreground: #ededed;
@@ -99,6 +101,7 @@ html.dark video {
 .dark {
   &:root {
     --background: #0f1214;
+    --background-alt: #13171a;
     --background-white: #ededed;
     --backgroundTransparent: #0f121450;
     --foreground: #ededed;

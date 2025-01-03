@@ -21,7 +21,6 @@ const translations = {
 };
 
 const Footer: React.FC<WithLocale> = ({ locale }) => {
-  const date = new Date();
   const keys = translations[locale];
 
   return (

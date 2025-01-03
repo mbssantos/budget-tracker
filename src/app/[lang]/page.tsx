@@ -1,7 +1,7 @@
 import { Card, CardList } from "@/components/cardList";
 import { Headline } from "@/components/text";
 import CmsService from "@/features/cms/cmsService";
-import { MyProjects } from "@/features/projects/myProjects";
+import { LatestProjects } from "@/features/projects/latestProjects";
 import { GenMetadata, PageProps } from "@/types";
 import { getDictionary } from "./dictionaries";
 
@@ -29,7 +29,7 @@ export default async function Home({ params }: PageProps) {
       <Headline className="center m-t-48 m-b-24">
         {dict.global.budgetTracker}
       </Headline>
-      <MyProjects />
+      <LatestProjects />
 
       <div className="grid">
         <Headline level={2} className="center m-b-24">
