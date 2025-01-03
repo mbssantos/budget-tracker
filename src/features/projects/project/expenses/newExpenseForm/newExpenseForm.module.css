@@ -14,7 +14,7 @@ form.newExpenseForm > label {
 }
 
 .buttonWrapper {
-  margin-top: var(--spacing-24);
   display: flex;
+  margin-top: var(--spacing-24);
   justify-content: space-between;
 }

@@ -109,7 +109,13 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
                     </Text>
                   </td>
                   <td>
-                    <Text>{expense.tags.length} tags</Text>
+                    <Text>
+                      {expense.tags.map(({ id, label }) => (
+                        <Text key={id} className={styles.tag}>
+                          {label}
+                        </Text>
+                      ))}
+                    </Text>
                   </td>
                   <td>
                     <Button onClick={handleDeleteClick.bind(null, expense.id)}>

@@ -18,6 +18,9 @@
   width: 100%;
   border-collapse: collapse;
 }
+.expenseList table tr:hover {
+  background: var(--background-alt);
+}
 
 .expenseList th {
   white-space: nowrap;
@@ -41,4 +44,18 @@
   border: 0px;
   width: 2rem;
   height: 2em;
+}
+
+.tag {
+  cursor: default;
+  padding: var(--spacing-8) var(--spacing-16);
+  margin: var(--spacing-8);
+  border-radius: var(--border-radius);
+  background-color: var(--background-alt);
+  transition: 250ms background-color;
+  box-shadow: var(--box-shadow-alt);
+}
+
+.tag:hover {
+  background-color: var(--background);
 }
