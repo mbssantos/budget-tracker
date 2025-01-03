@@ -1,6 +1,7 @@
 import { Text } from "@/components/text";
 import TagService from "@/features/tags/tagService";
 import { Tag } from "@/features/tags/types";
+import { getColorFromString } from "@/utils/getColorFromString";
 import { inputHandler } from "@/utils/inputHandlers";
 import Close from "@mui/icons-material/Close";
 import cx from "classnames";
@@ -113,6 +114,7 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
               key={tag.id}
               className={styles.removeTagButton}
               onClick={onRemove.bind(null, tag)}
+              style={{ backgroundColor: getColorFromString(tag.id) }}
             >
               <Text>
                 {tag.label}

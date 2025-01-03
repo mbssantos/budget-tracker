@@ -3,6 +3,7 @@ import Message from "@/components/message/message";
 import { Text } from "@/components/text";
 import ProjectService from "@/features/projects/projectsService";
 import { Project } from "@/features/projects/types";
+import { getColorFromString } from "@/utils/getColorFromString";
 import { getFormattedDate } from "@/utils/getFormattedDate";
 import { DeleteForever } from "@mui/icons-material";
 import styles from "./expenseList.module.css";
@@ -29,17 +30,12 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
   };
 
   const handleIsPayedChange = (expenseId: string) => {
-    console.log("wata");
     // get the event target
     const expense = expenses.find(({ id }) => expenseId === id);
-
-    console.log("wat");
 
     if (!expense) {
       throw new Error(`Failed to find expense with id ${expenseId}`);
     }
-
-    console.log("updating");
 
     ProjectService.updateExpense(pid, {
       ...expense,
@@ -49,8 +45,6 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
 
     onChange();
   };
-
-  console.log({ expenses });
 
   return (
     <div className={styles.expenseList}>
@@ -111,7 +105,11 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
                   <td>
                     <Text>
                       {expense.tags.map(({ id, label }) => (
-                        <Text key={id} className={styles.tag}>
+                        <Text
+                          key={id}
+                          className={styles.tag}
+                          style={{ backgroundColor: getColorFromString(id) }}
+                        >
                           {label}
                         </Text>
                       ))}
