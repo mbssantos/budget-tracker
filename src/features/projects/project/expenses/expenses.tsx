@@ -1,7 +1,6 @@
 import { Headline } from "@/components/text";
 import { Project } from "../../types";
 import { ExpenseList } from "./expenseList";
-import styles from "./expenses.module.css";
 import { NewExpenseForm } from "./newExpenseForm";
 
 type ProjectExpensesProps = {
@@ -17,7 +16,7 @@ type ProjectExpensesProps = {
  */
 const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
   return (
-    <div className={styles.expenses}>
+    <div>
       <Headline level={2}>Expenses</Headline>
       <ExpenseList project={project} onChange={onChange} />
       <NewExpenseForm pid={project.id} onChange={onChange} />

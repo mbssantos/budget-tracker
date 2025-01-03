@@ -1,13 +1,11 @@
-import { Button } from "@/components/button";
 import Message from "@/components/message/message";
 import { Text } from "@/components/text";
-import ProjectService from "@/features/projects/projectsService";
-import { Project } from "@/features/projects/types";
-import { getColorFromString } from "@/utils/getColorFromString";
-import { getFormattedDate } from "@/utils/getFormattedDate";
-import { DeleteForever } from "@mui/icons-material";
+import { Expense, Project } from "@/features/projects/types";
+import { inputHandler } from "@/utils/inputHandlers";
+import { FilterList } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import styles from "./expenseList.module.css";
-export { default as ExpenseList } from "./expenseList";
+import ExpenseTable from "./expenseTable";
 
 type ExpenseListProps = {
   /**
@@ -24,30 +22,69 @@ type ExpenseListProps = {
 const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
   const { id: pid, expenses } = project;
 
-  const handleDeleteClick = (expenseId: string) => {
-    ProjectService.removeExpense(pid, expenseId);
-    onChange();
-  };
+  const [nameFilter, setNameFilter] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [upToDate, setUpToDate] = useState("");
 
-  const handleIsPayedChange = (expenseId: string) => {
-    // get the event target
-    const expense = expenses.find(({ id }) => expenseId === id);
+  const [filteredExpenses, setFilteredExpenses] = useState<Expense[]>([]);
 
-    if (!expense) {
-      throw new Error(`Failed to find expense with id ${expenseId}`);
+  useEffect(() => {
+    let results = [...expenses];
+
+    if (nameFilter) {
+      const lowercaseFilter = nameFilter.toLocaleLowerCase();
+      results = results.filter(({ name }) =>
+        name.toLocaleLowerCase().includes(lowercaseFilter)
+      );
     }
 
-    ProjectService.updateExpense(pid, {
-      ...expense,
-      // toggle payed flag
-      isPayed: !expense.isPayed,
-    });
+    if (fromDate) {
+      const unixDate = new Date(fromDate).getTime();
+      results = results.filter(({ dueDate }) => dueDate >= unixDate);
+    }
 
-    onChange();
-  };
+    if (upToDate) {
+      const unixDate = new Date(upToDate).getTime();
+      results = results.filter(({ dueDate }) => dueDate <= unixDate);
+    }
+
+    setFilteredExpenses(results);
+    // filter expenses when filters change
+  }, [expenses, nameFilter, fromDate, upToDate]);
 
   return (
     <div className={styles.expenseList}>
+      <Text size={1}>
+        Filters results <FilterList />
+      </Text>
+
+      <div className={styles.filters}>
+        <Text Tag="label">
+          Name filter
+          <input
+            type="text"
+            value={nameFilter}
+            onChange={inputHandler(setNameFilter)}
+          />
+        </Text>
+        <Text Tag="label">
+          From date
+          <input
+            type="date"
+            value={fromDate}
+            onChange={inputHandler(setFromDate)}
+          />
+        </Text>
+        <Text Tag="label">
+          Up to
+          <input
+            type="date"
+            value={upToDate}
+            onChange={inputHandler(setUpToDate)}
+          />
+        </Text>
+      </div>
+
       {expenses.length === 0 && (
         <Message>
           <Text>
@@ -56,77 +93,20 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
         </Message>
       )}
 
-      {expenses.length > 0 && (
-        <div className={styles.tableWrapper}>
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  <Text size={3}>Name</Text>
-                </th>
-                <th>
-                  <Text size={3}>Amount</Text>
-                </th>
-                <th>
-                  <Text size={3}>Due date</Text>
-                </th>
-                <th>
-                  <Text size={3}>is payed</Text>
-                </th>
-                <th>
-                  <Text size={3}>tags</Text>
-                </th>
-                <th>
-                  <Text size={3}>Delete</Text>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {expenses.map((expense) => (
-                <tr key={expense.id}>
-                  <td>
-                    <Text>{expense.name}</Text>
-                  </td>
-                  <td>
-                    <Text>{expense.amount}</Text>
-                  </td>
-                  <td>
-                    <Text>{getFormattedDate(expense.dueDate)}</Text>
-                  </td>
-                  <td className="center">
-                    <Text size={2}>
-                      <input
-                        type="checkbox"
-                        checked={!expense.isPayed}
-                        onChange={handleIsPayedChange.bind(null, expense.id)}
-                      />
-                    </Text>
-                  </td>
-                  <td>
-                    <Text>
-                      {expense.tags.map(({ id, label }) => (
-                        <Text
-                          key={id}
-                          className={styles.tag}
-                          style={{ backgroundColor: getColorFromString(id) }}
-                        >
-                          {label}
-                        </Text>
-                      ))}
-                    </Text>
-                  </td>
-                  <td>
-                    <Button onClick={handleDeleteClick.bind(null, expense.id)}>
-                      <Text size={2}>
-                        <DeleteForever />
-                      </Text>
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {expenses.length > 0 && filteredExpenses.length === 0 && (
+        <Message>
+          <Text>
+            No expenses to display. Update your filters to see results
+          </Text>
+        </Message>
+      )}
+
+      {filteredExpenses.length > 0 && (
+        <ExpenseTable
+          expenses={filteredExpenses}
+          onChange={onChange}
+          pid={pid}
+        />
       )}
     </div>
   );

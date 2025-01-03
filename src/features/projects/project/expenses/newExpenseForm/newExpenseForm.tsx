@@ -38,9 +38,10 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
     // assume form validation catches all user errors
     ProjectService.addExpense(pid, {
       name,
-      amount,
-      dueDate: new Date(date).getTime(),
       tags,
+      amount,
+      isPayed: false,
+      dueDate: new Date(date).getTime(),
     });
 
     onChange();

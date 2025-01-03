@@ -1,0 +1,57 @@
+/* allow smooth scrolling on mobile */
+.expenseTable {
+  overflow: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  box-shadow: var(--box-shadow-alt);
+}
+
+.expenseTable::-webkit-scrollbar {
+  display: none;
+}
+
+.expenseTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.expenseTable table tr:hover {
+  background: var(--background-alt);
+}
+
+.expenseTable th {
+  white-space: nowrap;
+  background-color: var(--background-alt);
+  padding: var(--spacing-24);
+  text-align: left;
+}
+
+.expenseTable th,
+.expenseTable td {
+  border: 1px solid var(--border-color);
+}
+
+.expenseTable td {
+  padding: var(--spacing-8) var(--spacing-24);
+  vertical-align: middle;
+}
+
+.expenseTable input[type="checkbox"] {
+  cursor: pointer;
+  border: 0px;
+  width: 2rem;
+  height: 2em;
+}
+
+.tag {
+  cursor: default;
+  padding: var(--spacing-8) var(--spacing-16);
+  margin: var(--spacing-8);
+  border-radius: var(--border-radius);
+  background-color: var(--background-alt);
+  transition: 250ms background-color;
+  box-shadow: var(--box-shadow-alt);
+}
+
+.tag:hover {
+  background-color: var(--background);
+}
