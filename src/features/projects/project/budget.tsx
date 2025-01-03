@@ -1,14 +1,14 @@
 import { Text } from "@/components/text";
 import { ChangeEventHandler } from "react";
-import ProjectService from "./projectsService";
-import { Project } from "./types";
+import ProjectService from "../projectsService";
+import { Project } from "../types";
 
 type ProjectBudgetProps = {
   project: Project;
   onChange: () => void;
 };
 
-const ProjectBudget: React.FC<ProjectBudgetProps> = ({ project, onChange }) => {
+const Budget: React.FC<ProjectBudgetProps> = ({ project, onChange }) => {
   const { id, budget } = project;
 
   const handleBudgetChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -18,7 +18,7 @@ const ProjectBudget: React.FC<ProjectBudgetProps> = ({ project, onChange }) => {
 
   return (
     <Text Tag="label">
-      Budget
+      Starting budget
       <input
         min={0}
         required
@@ -30,4 +30,4 @@ const ProjectBudget: React.FC<ProjectBudgetProps> = ({ project, onChange }) => {
   );
 };
 
-export default ProjectBudget;
+export default Budget;

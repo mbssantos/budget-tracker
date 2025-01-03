@@ -1,5 +1,5 @@
 import { LocalStorageService } from "@/utils/localStorageService";
-import { CreateProject, Project } from "./types";
+import { CreateProject, Expense, Project } from "./types";
 
 const LOCAL_STORAGE_KEY = "my-projects";
 
@@ -11,6 +11,22 @@ const lss = new LocalStorageService<Project>(LOCAL_STORAGE_KEY);
  * Handles specific logic related to projects like setting defaults and handling updates
  */
 const ProjectService = {
+  addExpense(id: string, expense: Expense) {
+    // get latest data from storage
+    const project = lss.getById(id);
+
+    if (!project) {
+      // todo: handle error in the UI
+      throw new Error(`Project with id ${id} not found`);
+    }
+
+    // add expense to project
+    project.expenses.push(expense);
+
+    // save project changes
+    ProjectService.upsert(id, project);
+  },
+
   upsert(id: string, delta: Partial<Project>) {
     return lss.upsert(id, delta);
   },
@@ -18,24 +34,8 @@ const ProjectService = {
   create(data: CreateProject) {
     return lss.create({
       ...data,
-      quarters: [
-        {
-          expenses: [],
-          revenues: [],
-        },
-        {
-          expenses: [],
-          revenues: [],
-        },
-        {
-          expenses: [],
-          revenues: [],
-        },
-        {
-          expenses: [],
-          revenues: [],
-        },
-      ],
+      expenses: [],
+      revenues: [],
     });
   },
 

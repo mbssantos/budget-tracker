@@ -1,0 +1,6 @@
+.message {
+  background-color: var(--message-info-bcg);
+  border: 1px solid var(--message-info-border);
+  margin: var(--spacing-16) 0;
+  padding: var(--spacing-16);
+}

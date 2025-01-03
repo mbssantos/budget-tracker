@@ -1,0 +1,30 @@
+form.newExpenseForm {
+  margin: var(--spacing-24) 0;
+  padding: var(--spacing-24) var(--spacing-24);
+  box-shadow: var(--box-shadow-alt);
+}
+
+form.newExpenseForm h3 {
+  margin-bottom: var(--spacing-24);
+}
+
+.buttonWrapper {
+  text-align: right;
+}
+
+.twoInputs {
+  display: flex;
+  align-items: center;
+}
+
+.twoInputs > * {
+  flex: 1;
+}
+
+.twoInputs > *:first-child {
+  margin-right: var(--spacing-8);
+}
+
+.twoInputs > *:last-child {
+  margin-left: var(--spacing-8);
+}

@@ -23,6 +23,13 @@ export class LocalStorageService<T extends K> {
     this.storageKey = storageKey;
   }
 
+  /**
+   * Check if the key exists in local storage
+   */
+  exists() {
+    return localStorage.getItem(this.storageKey) !== null;
+  }
+
   count() {
     return this.getAllAsArray().length;
   }
@@ -32,10 +39,14 @@ export class LocalStorageService<T extends K> {
    * @param data
    * @returns
    */
-  create(data: Omit<T, "id" | "createdAt">) {
-    // real DBs would use UUIDs or some such
-    const id = encode(`${Math.random()}`);
-    return this.upsert(id, { id, createdAt: Date.now(), ...data } as T);
+  create(...data: Omit<T, "id" | "createdAt">[]) {
+    // insert all items
+    return data.map((entry) => {
+      // real DBs would use UUIDs or some such
+      const id = encode(`${Math.random()}`);
+
+      return this.upsert(id, { id, createdAt: Date.now(), ...entry } as T);
+    });
   }
 
   /**

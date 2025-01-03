@@ -1,4 +1,4 @@
-import Project from "@/features/projects/project";
+import { Project } from "@/features/projects/project";
 import { PageProps } from "@/types";
 
 type ProjectPageProps = {

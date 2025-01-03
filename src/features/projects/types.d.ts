@@ -4,6 +4,7 @@ export type Expense = {
   source: ExpenseSource;
   amount: number;
 };
+
 export type Revenue = {
   label: string;
   amount: number;
@@ -19,8 +20,8 @@ export type Project = {
   title: string;
   budget: number;
   createdAt: number;
-
-  quarters: [Quarter, Quarter, Quarter, Quarter];
+  expenses: Expense[];
+  revenues: Revenue[];
 };
 
 export type CreateProject = Pick<Project, "title" | "budget">;
