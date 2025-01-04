@@ -1,11 +1,12 @@
 import { Button } from "@/components/button";
 import { Headline, Text } from "@/components/text";
-import { Budget, Expense } from "@/features/projects/types";
+import { Expense, Project } from "@/features/projects/types";
 import { Tag } from "@/features/tags/types";
 import { generateId } from "@/utils/generateId";
 import { inputHandler, inputHandlerNumber } from "@/utils/inputHandlers";
 import { FormEventHandler, useMemo, useState } from "react";
 import Select, { SelectOption } from "../input/select/select";
+import { Message } from "../message";
 import styles from "./formStyles.module.css";
 import FormTags from "./formTags";
 
@@ -15,7 +16,7 @@ type NewExpenseFormProps = {
    */
   onAdd: (props: Expense) => void;
 
-  budgets: Pick<Budget, "id" | "label">[];
+  project: Project;
 };
 
 /**
@@ -23,12 +24,31 @@ type NewExpenseFormProps = {
  *
  * @returns
  */
-const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, budgets }) => {
+const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, project }) => {
+  const { budget, expenses } = project;
+  const { budgets } = budget;
+
   const [name, setName] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [amount, setAmount] = useState(0);
   const [budgetId, setBudgetId] = useState("");
   const [tags, setTags] = useState<Tag[]>([]);
+
+  const remainingBudget = useMemo(() => {
+    if (!budgetId) {
+      return null;
+    }
+
+    const budgetAmount = budgets.find(({ id }) => id === budgetId);
+
+    return expenses.reduce((acc, expense) => {
+      if (expense.budgetId === budgetId) {
+        return acc - expense.amount;
+      }
+
+      return acc;
+    }, budgetAmount?.amount || 0);
+  }, [budgetId]);
 
   const budgetSelectOptions = useMemo(() => {
     const opts = budgets.map(
@@ -128,6 +148,15 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, budgets }) => {
               onAdd={handleAddTag}
               onRemove={handleRemoveTag}
             />
+
+            {remainingBudget !== null && remainingBudget - amount < 0 && (
+              <Message>
+                <Text>
+                  Adding this expense would exceed the available budget of{" "}
+                  {remainingBudget}
+                </Text>
+              </Message>
+            )}
 
             <div className={styles.buttonWrapper}>
               <Button level={2} type="button" onClick={handleClear}>

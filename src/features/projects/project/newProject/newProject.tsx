@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/button";
-import AddBudgetForm from "@/components/form/budgetForm";
+import AddBudgetForm from "@/components/form/addBudgetForm";
 import { Headline, Text } from "@/components/text";
 import useLocale from "@/hooks/useLocale";
 import { generateId } from "@/utils/generateId";

@@ -1,4 +1,4 @@
-import AddBudgetForm from "@/components/form/budgetForm";
+import AddBudgetForm from "@/components/form/addBudgetForm";
 import { Headline } from "@/components/text";
 import { useCallback } from "react";
 import ProjectService from "../../projectsService";

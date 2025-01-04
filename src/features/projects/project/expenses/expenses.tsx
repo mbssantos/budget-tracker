@@ -1,4 +1,4 @@
-import AddExpenseForm from "@/components/form/expensesForm";
+import AddExpenseForm from "@/components/form/addExpenseForm";
 import { Headline } from "@/components/text";
 import { useCallback } from "react";
 import ProjectService from "../../projectsService";
@@ -34,10 +34,7 @@ const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
         <ExpenseList project={project} onChange={onChange} />
       </div>
 
-      <AddExpenseForm
-        onAdd={handleAddExpense}
-        budgets={project.budget.budgets}
-      />
+      <AddExpenseForm onAdd={handleAddExpense} project={project} />
     </>
   );
 };

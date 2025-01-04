@@ -1,6 +1,7 @@
 import { Headline } from "@/components/text";
 import { Project } from "../../types";
 import styles from "./overview.module.css";
+import UpcomingExpenses from "./upcomingExpenses";
 
 type OverviewProps = {
   project: Project;
@@ -15,6 +16,8 @@ const Overview: React.FC<OverviewProps> = ({ project, onChange }) => {
           <Headline className="m-b-24" level={2}>
             Overview
           </Headline>
+
+          <UpcomingExpenses expenses={project.expenses} />
         </div>
       </div>
     </div>
