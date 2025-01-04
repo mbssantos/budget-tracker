@@ -2,18 +2,28 @@ import { Link } from "@/components/link";
 import { Headline, Text } from "@/components/text";
 import useLocale from "@/hooks/useLocale";
 import BusinessCenter from "@mui/icons-material/BusinessCenter";
-import { Project } from "../../types";
+import { Project } from "../../features/projects/types";
 import styles from "./projectCard.module.css";
+
+const getBudgetLabel = (remainingBudgetPercentage: number) => {
+  if (remainingBudgetPercentage < 0) {
+    return `${Math.abs(remainingBudgetPercentage)}% over budget`;
+  }
+
+  return `${remainingBudgetPercentage}% budget left`;
+};
 
 const ProjectCard: React.FC<Project> = (project) => {
   const { id, title, remainingBudget, budget } = project;
   const locale = useLocale();
 
-  const usedBudgetPercentage = Math.round(
-    100 - (remainingBudget / Math.max(budget, 1)) * 100
+  const remainingBudgetPercentage = Math.round(
+    (remainingBudget / Math.max(budget, 1)) * 100
   );
 
-  // cap progress bar width
+  const usedBudgetPercentage = 100 - remainingBudgetPercentage;
+
+  // clamp progress bar width
   const widthPercentage = Math.min(usedBudgetPercentage, 100);
 
   return (
@@ -31,7 +41,7 @@ const ProjectCard: React.FC<Project> = (project) => {
               className={styles.budgetPercentage}
               style={{ width: `${widthPercentage}%` }}
             ></div>
-            <Text size={5}>{usedBudgetPercentage}% budget used</Text>
+            <Text size={5}>{getBudgetLabel(remainingBudgetPercentage)}</Text>
           </div>
         </Link>
       </div>

@@ -65,51 +65,57 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
   };
 
   return (
-    <form className={styles.newExpenseForm} onSubmit={handleSubmit}>
-      <Headline level={3}>Add expense</Headline>
-      <Text Tag="label">
-        Name
-        <input
-          type="text"
-          required
-          value={name}
-          placeholder="Expense name"
-          onChange={inputHandler(setName)}
-        />
-      </Text>
-      <Text Tag="label">
-        Amount
-        <input
-          min={0}
-          type="number"
-          placeholder="Amount expended"
-          value={amount}
-          onChange={inputHandlerNumber(setAmount)}
-        />
-      </Text>
-      <Text Tag="label">
-        Due date
-        <input
-          required
-          type="date"
-          value={date}
-          onChange={inputHandler(setDate)}
-        />
-      </Text>
+    <div className={styles.newExpenseFormWrapper}>
+      <div className="mw-full">
+        <div className="m-t-48">
+          <form className={styles.newExpenseForm} onSubmit={handleSubmit}>
+            <Headline level={3}>Add expense</Headline>
+            <Text Tag="label">
+              Name
+              <input
+                type="text"
+                required
+                value={name}
+                placeholder="Expense name"
+                onChange={inputHandler(setName)}
+              />
+            </Text>
+            <Text Tag="label">
+              Amount
+              <input
+                min={0}
+                type="number"
+                placeholder="Amount expended"
+                value={amount}
+                onChange={inputHandlerNumber(setAmount)}
+              />
+            </Text>
+            <Text Tag="label">
+              Due date
+              <input
+                required
+                type="date"
+                value={date}
+                onChange={inputHandler(setDate)}
+              />
+            </Text>
 
-      <NewExpenseTags
-        tags={tags}
-        onAdd={handleAddTag}
-        onRemove={handleRemoveTag}
-      />
+            <NewExpenseTags
+              tags={tags}
+              onAdd={handleAddTag}
+              onRemove={handleRemoveTag}
+            />
 
-      <div className={styles.buttonWrapper}>
-        <Button level={2} type="button" onClick={handleClear}>
-          clear
-        </Button>
-        <Button level={1}>Add</Button>
+            <div className={styles.buttonWrapper}>
+              <Button level={2} type="button" onClick={handleClear}>
+                clear
+              </Button>
+              <Button level={1}>Add</Button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
+    </div>
   );
 };
 

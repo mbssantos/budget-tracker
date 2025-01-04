@@ -8,5 +8,5 @@
 
 .filters > label {
   display: inline-block;
-  margin: var(--spacing-8) var(--spacing-16);
+  margin: var(--spacing-16) var(--spacing-16) 0 0;
 }

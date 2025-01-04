@@ -1,32 +1,26 @@
-export type Subscriber<T> = (param: T) => void;
+export type Observer = () => void;
 
 /**
  * General purpose Observable pattern implementation
  */
-class Observable<T = void> {
-  private entries: Subscriber<T>[] = [];
+class Observable {
+  private observers: Observer[] = [];
 
-  constructor() {}
-
-  subscribe(subscriber: Subscriber<T>) {
-    this.entries.push(subscriber);
+  subscribe(subscriber: Observer) {
+    this.observers.push(subscriber);
   }
 
-  unsubscribe(subscriber: Subscriber<T>) {
-    const index = this.entries.indexOf(subscriber);
+  unsubscribe(subscriber: Observer) {
+    const index = this.observers.indexOf(subscriber);
     if (index >= 0) {
-      this.entries.splice(index, 1);
+      this.observers.splice(index, 1);
     }
   }
 
-  notify(param: T) {
-    for (let index = 0; index < this.entries.length; index++) {
-      this.entries[index](param);
+  notify() {
+    for (let i = 0; i < this.observers.length; i++) {
+      this.observers[i]();
     }
-  }
-
-  count() {
-    return this.entries.length;
   }
 }
 

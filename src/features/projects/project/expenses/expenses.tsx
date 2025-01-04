@@ -16,11 +16,15 @@ type ProjectExpensesProps = {
  */
 const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
   return (
-    <div>
-      <Headline level={2}>Expenses</Headline>
-      <ExpenseList project={project} onChange={onChange} />
+    <>
+      <div className="mw-full">
+        <div className="m-24 m-t-48">
+          <Headline level={2}>Expenses</Headline>
+        </div>
+        <ExpenseList project={project} onChange={onChange} />
+      </div>
       <NewExpenseForm pid={project.id} onChange={onChange} />
-    </div>
+    </>
   );
 };
 

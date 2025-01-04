@@ -7,10 +7,10 @@ import Message from "@/components/message/message";
 import { Headline, Text } from "@/components/text";
 import useLocale from "@/hooks/useLocale";
 import { useEffect, useState } from "react";
+import ProjectCard from "../../../components/projectCard/projectCard";
 import ProjectService from "../projectsService";
 import { Project } from "../types";
 import styles from "./latestProjects.module.css";
-import ProjectCard from "./projectCard/projectCard";
 
 const LatestProjects = () => {
   const locale = useLocale();

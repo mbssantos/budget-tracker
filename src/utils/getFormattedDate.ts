@@ -9,7 +9,7 @@ export const getFormattedDate = (unixDate: number) => {
 
   // use new formatter
   if (date.toLocaleString) {
-    return date.toLocaleString("en", {
+    return date.toLocaleString("en-UK", {
       day: "2-digit",
       month: "long",
       year: "numeric",

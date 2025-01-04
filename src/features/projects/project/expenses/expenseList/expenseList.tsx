@@ -54,52 +54,54 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
 
   return (
     <div className={styles.expenseList}>
-      <Text size={1}>
-        Filters results <FilterList />
-      </Text>
+      <div className="m-24 m-t-48">
+        <Text size={1}>
+          <FilterList /> Filter results
+        </Text>
 
-      <div className={styles.filters}>
-        <Text Tag="label">
-          Name filter
-          <input
-            type="text"
-            value={nameFilter}
-            onChange={inputHandler(setNameFilter)}
-          />
-        </Text>
-        <Text Tag="label">
-          From date
-          <input
-            type="date"
-            value={fromDate}
-            onChange={inputHandler(setFromDate)}
-          />
-        </Text>
-        <Text Tag="label">
-          Up to
-          <input
-            type="date"
-            value={upToDate}
-            onChange={inputHandler(setUpToDate)}
-          />
-        </Text>
+        <div className={styles.filters}>
+          <Text Tag="label">
+            Name filter
+            <input
+              type="text"
+              value={nameFilter}
+              onChange={inputHandler(setNameFilter)}
+            />
+          </Text>
+          <Text Tag="label">
+            From date
+            <input
+              type="date"
+              value={fromDate}
+              onChange={inputHandler(setFromDate)}
+            />
+          </Text>
+          <Text Tag="label">
+            Up to
+            <input
+              type="date"
+              value={upToDate}
+              onChange={inputHandler(setUpToDate)}
+            />
+          </Text>
+        </div>
+
+        {expenses.length === 0 && (
+          <Message>
+            <Text>
+              No expenses to display. Add new expenses using the form below.
+            </Text>
+          </Message>
+        )}
+
+        {expenses.length > 0 && filteredExpenses.length === 0 && (
+          <Message>
+            <Text>
+              No expenses to display. Update your filters to see results
+            </Text>
+          </Message>
+        )}
       </div>
-
-      {expenses.length === 0 && (
-        <Message>
-          <Text>
-            No expenses to display. Add new expenses using the form below.
-          </Text>
-        </Message>
-      )}
-
-      {expenses.length > 0 && filteredExpenses.length === 0 && (
-        <Message>
-          <Text>
-            No expenses to display. Update your filters to see results
-          </Text>
-        </Message>
-      )}
 
       {filteredExpenses.length > 0 && (
         <ExpenseTable

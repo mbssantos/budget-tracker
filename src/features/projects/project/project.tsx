@@ -2,7 +2,7 @@
 
 import { Spinner } from "@/components/spinner";
 import { Headline } from "@/components/text";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ProjectService from "../projectsService";
 import { Project as ProjectType } from "../types";
 import Expenses from "./expenses/expenses";
@@ -21,9 +21,9 @@ const Project: React.FC<ProjectProps> = ({ id }) => {
     setIsLoaded(true);
   }, []);
 
-  const fetchProject = () => {
+  const fetchProject = useCallback(() => {
     setProject(ProjectService.getById(id));
-  };
+  }, [id, setProject]);
 
   if (!project) {
     return (
@@ -42,14 +42,7 @@ const Project: React.FC<ProjectProps> = ({ id }) => {
       </Headline>
 
       <Overview project={project} onChange={fetchProject} />
-
-      <div className="mw-full">
-        <div className="m-16">
-          <div className="m-0a">
-            <Expenses project={project} onChange={fetchProject} />
-          </div>
-        </div>
-      </div>
+      <Expenses project={project} onChange={fetchProject} />
     </section>
   );
 };

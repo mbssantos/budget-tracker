@@ -1,7 +1,9 @@
+.newExpenseFormWrapper {
+  background-color: var(--background-alt);
+}
+
 form.newExpenseForm {
-  margin: var(--spacing-24) 0;
   padding: var(--spacing-24) var(--spacing-24);
-  box-shadow: var(--box-shadow-alt);
 }
 
 form.newExpenseForm h3 {

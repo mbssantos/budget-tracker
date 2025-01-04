@@ -92,7 +92,7 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({
                 <Text size={2}>
                   <input
                     type="checkbox"
-                    checked={!expense.isPayed}
+                    checked={expense.isPayed}
                     onChange={handleIsPayedChange.bind(null, expense.id)}
                   />
                 </Text>

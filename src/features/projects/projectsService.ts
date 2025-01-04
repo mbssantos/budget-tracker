@@ -81,6 +81,9 @@ const ProjectService = {
       project.expenses[expenseIndex] = expense;
     }
 
+    // cache remaining budget for quick access later
+    project.remainingBudget = ProjectService.getRemainingBudget(project);
+
     // save project
     lss.upsert(pid, project);
   },
@@ -105,6 +108,9 @@ const ProjectService = {
       // remove from array
       project.expenses.splice(expenseIndex, 1);
     }
+
+    // cache remaining budget for quick access later
+    project.remainingBudget = ProjectService.getRemainingBudget(project);
 
     // save project
     lss.upsert(pid, project);
