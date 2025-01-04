@@ -113,10 +113,6 @@ svg.MuiSvgIcon-root.MuiSvgIcon-root {
   }
 }
 
-form {
-  margin: var(--spacing-24) auto var(--spacing-48);
-}
-
 label {
   display: block;
 }

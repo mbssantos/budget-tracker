@@ -4,15 +4,23 @@ export type ExpenseSource = "Thing";
 
 export type Expense = {
   id: string;
+
+  /**
+   * Keeping tags with the saved data allows for
+   * faster reads but slower writes, which is my prefer approach
+   * since data is read more often than it's changed.
+   */
   tags: Tag[];
   name: string;
   dueDate: number;
   amount: number;
   isPayed: boolean;
-  // Note: Adding a payed date would probably make sense for tracking
+  // Note: Adding a payment date would be nice
 };
 
-export type Revenue = {
+export type Budget = {
+  id: string;
+  tags: Tag[];
   label: string;
   amount: number;
 };
@@ -25,11 +33,16 @@ export type Quarter = {
 export type Project = {
   id: string;
   title: string;
-  budget: number;
-  remainingBudget: number;
+  budget: {
+    total: number;
+    budgets: Budget[];
+    remainingBudget: number;
+  };
   createdAt: number;
   expenses: Expense[];
-  revenues: Revenue[];
 };
 
-export type CreateProject = Pick<Project, "title" | "budget">;
+export type CreateProject = {
+  title: string;
+  budgets: Budget[];
+};

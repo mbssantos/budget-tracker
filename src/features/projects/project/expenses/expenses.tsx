@@ -1,7 +1,11 @@
+import AddExpenseForm, {
+  OnAddExpenseProps,
+} from "@/components/form/expensesForm";
 import { Headline } from "@/components/text";
+import { useCallback } from "react";
+import ProjectService from "../../projectsService";
 import { Project } from "../../types";
 import { ExpenseList } from "./expenseList";
-import { NewExpenseForm } from "./newExpenseForm";
 
 type ProjectExpensesProps = {
   project: Project;
@@ -15,6 +19,19 @@ type ProjectExpensesProps = {
  * @returns
  */
 const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
+  const handleAddExpense = useCallback(
+    ({ date, ...data }: OnAddExpenseProps) => {
+      // assume form validation catches all user errors
+      ProjectService.addExpense(project.id, {
+        ...data,
+        isPayed: false,
+        dueDate: new Date(date).getTime(),
+      });
+      onChange();
+    },
+    [project.id, onChange]
+  );
+
   return (
     <>
       <div className="mw-full">
@@ -23,7 +40,7 @@ const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
         </div>
         <ExpenseList project={project} onChange={onChange} />
       </div>
-      <NewExpenseForm pid={project.id} onChange={onChange} />
+      <AddExpenseForm onAdd={handleAddExpense} />
     </>
   );
 };

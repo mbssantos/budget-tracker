@@ -91,11 +91,18 @@ export class LocalStorageService<T extends K> {
    * Return an entry by id
    *
    * @param id
+   * @param throwOnNull throws and exception if the fetched value is null
    * @returns the entry or undefined
    */
-  getById(id: string): T | undefined {
+  getById(id: string, throwOnNull?: boolean) {
     const all = this.getAll();
-    return all[id];
+    const entry = all[id];
+
+    if (!entry && throwOnNull) {
+      throw new Error(`entry with id ${id} not found`);
+    }
+
+    return entry as T;
   }
 
   purge() {

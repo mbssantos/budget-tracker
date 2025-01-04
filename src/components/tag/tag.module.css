@@ -1,0 +1,24 @@
+.tag {
+  border: 0;
+  cursor: pointer;
+  padding: var(--spacing-8) var(--spacing-16);
+  margin: 0 var(--spacing-16) var(--spacing-16) 0;
+  border-radius: var(--border-radius);
+  background-color: var(--background);
+  transition: 250ms background-color;
+  box-shadow: var(--box-shadow-alt);
+}
+
+.tag:hover {
+  background-color: var(--background-alt);
+}
+
+.tag span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tag svg {
+  margin: 0;
+  margin-left: var(--spacing-8);
+}

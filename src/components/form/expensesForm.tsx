@@ -3,23 +3,29 @@ import { Headline, Text } from "@/components/text";
 import { Tag } from "@/features/tags/types";
 import { inputHandler, inputHandlerNumber } from "@/utils/inputHandlers";
 import { FormEventHandler, useState } from "react";
-import ProjectService from "../../../projectsService";
-import styles from "./newExpenseForm.module.css";
-import NewExpenseTags from "./newExpenseTags";
+import styles from "./formStyles.module.css";
+import FormTags from "./formTags";
+
+export type OnAddExpenseProps = {
+  name: string;
+  date: string;
+  amount: number;
+  tags: Tag[];
+};
 
 type NewExpenseFormProps = {
   /**
-   * Project id
-   */
-  pid: string;
-
-  /**
    * Notify parent when something relevant happens
    */
-  onChange: () => void;
+  onAdd: (props: OnAddExpenseProps) => void;
 };
 
-const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
+/**
+ * Add expense form
+ *
+ * @returns
+ */
+const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd }) => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [amount, setAmount] = useState(0);
@@ -34,17 +40,7 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-
-    // assume form validation catches all user errors
-    ProjectService.addExpense(pid, {
-      name,
-      tags,
-      amount,
-      isPayed: false,
-      dueDate: new Date(date).getTime(),
-    });
-
-    onChange();
+    onAdd({ name, tags, date, amount });
   };
 
   const handleAddTag = (tag: Tag) => {
@@ -76,7 +72,7 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
                 type="text"
                 required
                 value={name}
-                placeholder="Expense name"
+                placeholder="Name"
                 onChange={inputHandler(setName)}
               />
             </Text>
@@ -85,7 +81,7 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
               <input
                 min={0}
                 type="number"
-                placeholder="Amount expended"
+                placeholder="Amount"
                 value={amount}
                 onChange={inputHandlerNumber(setAmount)}
               />
@@ -100,7 +96,7 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
               />
             </Text>
 
-            <NewExpenseTags
+            <FormTags
               tags={tags}
               onAdd={handleAddTag}
               onRemove={handleRemoveTag}
@@ -119,4 +115,4 @@ const NewExpenseForm: React.FC<NewExpenseFormProps> = ({ pid, onChange }) => {
   );
 };
 
-export default NewExpenseForm;
+export default AddExpenseForm;

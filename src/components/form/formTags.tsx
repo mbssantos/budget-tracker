@@ -1,27 +1,22 @@
 import { Text } from "@/components/text";
 import TagService from "@/features/tags/tagService";
-import { Tag } from "@/features/tags/types";
-import { getColorFromString } from "@/utils/getColorFromString";
+import { Tag as TagType } from "@/features/tags/types";
 import { inputHandler } from "@/utils/inputHandlers";
-import Close from "@mui/icons-material/Close";
 import cx from "classnames";
 import { MouseEventHandler, useEffect, useState } from "react";
-import styles from "./newExpenseTags.module.css";
+import Tag from "../tag/tag";
+import styles from "./formTags.module.css";
+// import Tag from "../tag/tag";
 
-type NewExpenseTagsProps = {
-  onAdd: (tag: Tag) => void;
-  onRemove: (tag: Tag) => void;
-
-  tags: Tag[];
+type FormTagsProps = {
+  tags: TagType[];
+  onAdd: (tag: TagType) => void;
+  onRemove: (tag: TagType) => void;
 };
 
-const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
-  tags,
-  onAdd,
-  onRemove,
-}) => {
+const FormTags: React.FC<FormTagsProps> = ({ tags, onAdd, onRemove }) => {
   const [tag, setTag] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<Tag[]>([]);
+  const [suggestions, setSuggestions] = useState<TagType[]>([]);
 
   const currentTagIds = tags.map((tag) => tag.id);
 
@@ -34,7 +29,7 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
 
   // crates a bound event handler
   const handleTagSelect: (
-    selectedTag: Tag
+    selectedTag: TagType
   ) => MouseEventHandler<HTMLDivElement> = (selectedTag) => (e) => {
     // blur to hide autocomplete
     e?.currentTarget?.blur?.();
@@ -61,8 +56,8 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
   };
 
   return (
-    <div className={styles.newExpenseTags}>
-      <div className={styles.newExpenseTagsInput}>
+    <div className={styles.formTags}>
+      <div className={styles.newTagsInput}>
         <Text Tag="label">
           Tags
           <input
@@ -110,17 +105,7 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
       {tags.length > 0 && (
         <div className={styles.tagList}>
           {tags.map((tag) => (
-            <button
-              key={tag.id}
-              className={styles.removeTagButton}
-              onClick={onRemove.bind(null, tag)}
-              style={{ backgroundColor: getColorFromString(tag.id) }}
-            >
-              <Text>
-                {tag.label}
-                <Close />
-              </Text>
-            </button>
+            <Tag key={tag.id} tag={tag} onClick={onRemove} />
           ))}
         </div>
       )}
@@ -128,4 +113,4 @@ const NewExpenseTags: React.FC<NewExpenseTagsProps> = ({
   );
 };
 
-export default NewExpenseTags;
+export default FormTags;
