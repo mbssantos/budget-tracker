@@ -34,6 +34,19 @@ export class LocalStorageService<T extends K> {
     return this.getAllAsArray().length;
   }
 
+  delete(id: string) {
+    const items = this.getAll();
+
+    // if item exists
+    if (items[id]) {
+      // delete it
+      delete items[id];
+
+      // and save
+      localStorage.setItem(this.storageKey, JSON.stringify(items));
+    }
+  }
+
   /**
    * Create a new entry of the given type
    * @param data

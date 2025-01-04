@@ -152,7 +152,7 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
       )}
 
       <Headline className="m-24" level={5}>
-        Total expenses of results: {filteredExpensesAmount}
+        Expenses amount: {filteredExpensesAmount}
       </Headline>
     </div>
   );

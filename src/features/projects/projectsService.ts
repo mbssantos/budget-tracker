@@ -38,6 +38,15 @@ const calcRemainingBudget = (project: Project) => {
  */
 const ProjectService = {
   /**
+   * Delete a project by ID
+   *
+   * @param pid project id
+   */
+  delete(pid: string) {
+    lss.delete(pid);
+  },
+
+  /**
    * Update a projects budget
    *
    * @param param0 either the pid or the project obj must be sent
