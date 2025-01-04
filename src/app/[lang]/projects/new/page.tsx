@@ -33,35 +33,37 @@ export default function NewProjectPage({}: PageProps) {
   };
 
   return (
-    <main>
-      <Headline className="center m-t-48 m-b-24">Create new project</Headline>
+    <main className="mw-full">
+      <div className="m-24">
+        <Headline className="center m-t-48 m-b-24">Create new project</Headline>
 
-      <form onSubmit={handleSubmit}>
-        <Text Tag="label">
-          Title
-          <input
-            required
-            type="text"
-            onChange={handleTitleChange}
-            value={title}
-          />
-        </Text>
+        <form onSubmit={handleSubmit}>
+          <Text Tag="label">
+            Title
+            <input
+              required
+              type="text"
+              onChange={handleTitleChange}
+              value={title}
+            />
+          </Text>
 
-        <Text Tag="label">
-          Initial budget
-          <input
-            min={0}
-            required
-            type="number"
-            onChange={handleBudgetChange}
-            value={budget}
-          />
-        </Text>
+          <Text Tag="label">
+            Initial budget
+            <input
+              min={0}
+              required
+              type="number"
+              onChange={handleBudgetChange}
+              value={budget}
+            />
+          </Text>
 
-        <div className="center m-t-48">
-          <Button level={1}>Create</Button>
-        </div>
-      </form>
+          <div className="center m-t-48">
+            <Button level={1}>Create</Button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 }
