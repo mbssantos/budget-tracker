@@ -32,9 +32,10 @@ const getBudgetLabel = (budgets: Budget[], bid: string) => {
 const ExpenseTable: React.FC<ExpenseTableProps> = (props) => {
   const { pid, budgets, expenses, onChange } = props;
 
-  const getBudgetLabelCb = useCallback(getBudgetLabel.bind(null, budgets), [
-    budgets,
-  ]);
+  const getBudgetLabelCb = useCallback(
+    (bid: string) => getBudgetLabel(budgets, bid),
+    [budgets]
+  );
 
   const handleDeleteClick = (expenseId: string) => {
     ProjectService.removeExpense(pid, expenseId);
@@ -85,17 +86,15 @@ const ExpenseTable: React.FC<ExpenseTableProps> = (props) => {
             </Text>
           </td>
           <td>
-            <Text>
-              {expense.tags.map(({ id, label }) => (
-                <Text
-                  key={id}
-                  className={styles.tag}
-                  style={{ backgroundColor: getColorFromString(id) }}
-                >
-                  {label}
-                </Text>
-              ))}
-            </Text>
+            {expense.tags.map(({ id, label }) => (
+              <Text
+                key={id}
+                className={styles.tag}
+                style={{ backgroundColor: getColorFromString(id) }}
+              >
+                {label}
+              </Text>
+            ))}
           </td>
           <td>
             <Button onClick={handleDeleteClick.bind(null, expense.id)}>

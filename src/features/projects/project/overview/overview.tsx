@@ -5,10 +5,9 @@ import UpcomingExpenses from "./upcomingExpenses";
 
 type OverviewProps = {
   project: Project;
-  onChange: () => void;
 };
 
-const Overview: React.FC<OverviewProps> = ({ project, onChange }) => {
+const Overview: React.FC<OverviewProps> = ({ project }) => {
   return (
     <div className={styles.overview}>
       <div className="mw-full">

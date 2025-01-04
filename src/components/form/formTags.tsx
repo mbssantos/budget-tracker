@@ -27,7 +27,7 @@ const FormTags: React.FC<FormTagsProps> = ({ tags, onAdd, onRemove }) => {
     setSuggestions(TagService.search(tag, 5));
   }, [tag]);
 
-  // crates a bound event handler
+  // creates a bound event handler
   const handleTagSelect: (
     selectedTag: TagType
   ) => MouseEventHandler<HTMLDivElement> = (selectedTag) => (e) => {
@@ -95,7 +95,7 @@ const FormTags: React.FC<FormTagsProps> = ({ tags, onAdd, onRemove }) => {
 
             {suggestions.length === 0 && tag.length > 0 && (
               <div tabIndex={0} onClick={handleCreateTag}>
-                <Text>Crate tag &quot;{tag}&quot;</Text>
+                <Text>Create tag &quot;{tag}&quot;</Text>
               </div>
             )}
           </div>

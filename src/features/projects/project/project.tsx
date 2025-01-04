@@ -17,14 +17,14 @@ const Project: React.FC<ProjectProps> = ({ id }) => {
   const [project, setProject] = useState<ProjectType | undefined>();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    fetchProject();
-    setIsLoaded(true);
-  }, []);
-
   const fetchProject = useCallback(() => {
     setProject(ProjectService.getById(id));
   }, [id, setProject]);
+
+  useEffect(() => {
+    fetchProject();
+    setIsLoaded(true);
+  }, [fetchProject]);
 
   if (!project) {
     return (
@@ -42,7 +42,7 @@ const Project: React.FC<ProjectProps> = ({ id }) => {
         {project.title}
       </Headline>
 
-      <Overview project={project} onChange={fetchProject} />
+      <Overview project={project} />
       <Expenses project={project} onChange={fetchProject} />
       <Budget project={project} onChange={fetchProject} />
     </section>

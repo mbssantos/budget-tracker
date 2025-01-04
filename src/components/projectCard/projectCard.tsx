@@ -14,11 +14,11 @@ const getBudgetLabel = (remainingBudgetPercentage: number) => {
 };
 
 const ProjectCard: React.FC<Project> = (project) => {
-  const { id, title, remainingBudget, budget } = project;
+  const { id, title, budget } = project;
   const locale = useLocale();
 
   const remainingBudgetPercentage = Math.round(
-    (remainingBudget / Math.max(budget, 1)) * 100
+    (budget.remainingBudget / Math.max(budget.total, 1)) * 100
   );
 
   const usedBudgetPercentage = 100 - remainingBudgetPercentage;

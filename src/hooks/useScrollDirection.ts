@@ -82,5 +82,5 @@ export const useScrollDirection = ({
 
     return () =>
       window.removeEventListener("scroll", debHandleScroll as () => void);
-  }, []);
+  }, [onScrollUp, onScrollDown]);
 };

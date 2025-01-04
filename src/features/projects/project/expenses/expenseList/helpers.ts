@@ -14,6 +14,7 @@ export const getTagOptions = (expenses: Expense[]) => {
   const uniqueTags = expenses.reduce((acc, expense) => {
     expense.tags.forEach((tag) => {
       if (!uniqueTagIds.includes(tag.id)) {
+        uniqueTagIds.push(tag.id);
         acc.push(tag);
       }
     });
@@ -21,10 +22,12 @@ export const getTagOptions = (expenses: Expense[]) => {
     return acc;
   }, [] as Tag[]);
 
-  const options = uniqueTags.map((tag) => ({
-    value: tag.id,
-    label: tag.label,
-  })) as SelectOption<string>[];
+  const options = uniqueTags
+    .sort((a, b) => a.label.localeCompare(b.label))
+    .map((tag) => ({
+      value: tag.id,
+      label: tag.label,
+    })) as SelectOption<string>[];
 
   // add empty option
   options.unshift({ label: "-", value: "" });

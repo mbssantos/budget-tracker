@@ -1,6 +1,6 @@
 import { Select } from "@/components/input/select";
 import Message from "@/components/message/message";
-import { Text } from "@/components/text";
+import { Headline, Text } from "@/components/text";
 import { Expense, Project } from "@/features/projects/types";
 import { inputHandler } from "@/utils/inputHandlers";
 import { FilterList } from "@mui/icons-material";
@@ -68,6 +68,12 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
 
   const tagOptions = useMemo(() => getTagOptions(expenses), [expenses]);
   const budgetOptions = useMemo(() => getBudgetOptions(budgets), [budgets]);
+
+  const filteredExpensesAmount = useMemo(() => {
+    return filteredExpenses.reduce((acc, { amount }) => {
+      return acc + amount;
+    }, 0);
+  }, [filteredExpenses]);
 
   return (
     <div className={styles.expenseList}>
@@ -144,6 +150,10 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
           expenses={filteredExpenses}
         />
       )}
+
+      <Headline className="m-24" level={5}>
+        Total expenses of results: {filteredExpensesAmount}
+      </Headline>
     </div>
   );
 };

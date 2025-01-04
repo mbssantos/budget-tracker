@@ -49,7 +49,7 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, project }) => {
 
       return acc;
     }, budgetAmount?.amount || 0);
-  }, [budgetId]);
+  }, [budgetId, budgets, expenses]);
 
   const budgetSelectOptions = useMemo(
     () => getBudgetOptions(budgets),

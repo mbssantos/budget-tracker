@@ -35,7 +35,7 @@ export class LocalStorageService<T extends K> {
   }
 
   /**
-   * Crate a new entry of the given type
+   * Create a new entry of the given type
    * @param data
    * @returns
    */

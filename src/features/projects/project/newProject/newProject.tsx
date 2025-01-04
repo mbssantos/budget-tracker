@@ -7,7 +7,7 @@ import useLocale from "@/hooks/useLocale";
 import { generateId } from "@/utils/generateId";
 import { inputHandler } from "@/utils/inputHandlers";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
+import { FormEventHandler, useCallback, useMemo, useState } from "react";
 import ProjectService from "../../projectsService";
 import { Budget, Project } from "../../types";
 import BudgetsTable from "../budget/budgetsTable";
@@ -40,13 +40,14 @@ export const NewProject = ({}) => {
   const { title, budget } = project;
   const { budgets } = project.budget;
 
-  const handleCreateProject = useCallback(() => {
+  const handleSubmitForm: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
     const [{ id }] = ProjectService.create({
       title: title.trim(),
       budgets,
     });
     router.push(`/${locale}/projects/${id}`);
-  }, [title, budgets, router]);
+  };
 
   const setTitle = (title: string) => {
     setProject({ ...project, title });
@@ -77,7 +78,7 @@ export const NewProject = ({}) => {
         budget: { ...budget, budgets: newBudgets },
       });
     },
-    [budgets, setProject]
+    [budget, project, budgets, setProject]
   );
 
   const handleAddBudget = useCallback(
@@ -88,38 +89,42 @@ export const NewProject = ({}) => {
         budget: { ...budget, budgets: [...budgets, budgetSource] },
       });
     },
-    [budgets, setProject]
+    [budget, project, budgets, setProject]
   );
 
   return (
     <div className="m-24">
-      <Headline className="center m-t-48 m-b-24">Create new project</Headline>
+      <form onSubmit={handleSubmitForm}>
+        <Headline className="center m-t-48 m-b-24">Create new project</Headline>
 
-      <Text Tag="label">
-        <Headline level={4} className="m-t-24 m-b-24">
-          Project Name
+        <Text Tag="label">
+          <Headline level={4} className="m-t-24 m-b-24">
+            Project Name
+          </Headline>
+          <input
+            required
+            type="text"
+            onChange={inputHandler(setTitle)}
+            value={title}
+          />
+        </Text>
+
+        <Headline level={4} className="m-b-24">
+          Budgets
         </Headline>
-        <input
-          required
-          type="text"
-          onChange={inputHandler(setTitle)}
-          value={title}
-        />
-      </Text>
 
-      <Headline level={4} className="m-b-24">
-        Budgets
-      </Headline>
+        <BudgetsTable project={project} onDelete={handleDeleteBudget} />
 
-      <BudgetsTable project={project} onDelete={handleDeleteBudget} />
+        <Headline level={4} className="m-t-24 m-b-24">
+          Total project budget: {totalBudget}
+        </Headline>
 
-      <Headline level={4} className="m-t-24 m-b-24">
-        Total project budget: {totalBudget}
-      </Headline>
+        <div className="m-24">
+          <Button level={1}>Create project</Button>
+        </div>
+      </form>
 
       <AddBudgetForm onAdd={handleAddBudget} />
-
-      <Button onClick={handleCreateProject}>Crate project</Button>
     </div>
   );
 };

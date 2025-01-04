@@ -16,7 +16,7 @@ const Budget: React.FC<BudgetProps> = ({ project, onChange }) => {
       ProjectService.removeBudget(project.id, budgetId);
       onChange();
     },
-    [project.id]
+    [project.id, onChange]
   );
 
   const handleAddBudget = useCallback(
@@ -24,7 +24,7 @@ const Budget: React.FC<BudgetProps> = ({ project, onChange }) => {
       ProjectService.addBudget(project.id, budget);
       onChange();
     },
-    [project.id]
+    [project.id, onChange]
   );
 
   return (
