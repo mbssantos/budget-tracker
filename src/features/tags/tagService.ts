@@ -20,6 +20,10 @@ if (typeof window !== "undefined" && !lss.exists()) {
 }
 
 const TagService = {
+  getAllAsArray() {
+    return lss.getAllAsArray();
+  },
+
   create(label: string) {
     return lss.create({ label });
   },

@@ -2,7 +2,7 @@ import { Button } from "@/components/button";
 import { Table } from "@/components/table";
 import { Text } from "@/components/text";
 import ProjectService from "@/features/projects/projectsService";
-import { Budget, Project } from "@/features/projects/types";
+import { Budget, Expense } from "@/features/projects/types";
 import { getColorFromString } from "@/utils/getColorFromString";
 import { getFormattedDate } from "@/utils/getFormattedDate";
 import { DeleteForever } from "@mui/icons-material";
@@ -10,7 +10,14 @@ import { useCallback } from "react";
 import styles from "./expenseTable.module.css";
 
 type ExpenseTableProps = {
-  project: Project;
+  /**
+   * project id
+   */
+  pid: string;
+
+  budgets: Budget[];
+
+  expenses: Expense[];
 
   /**
    * Notify parent when something relevant happens
@@ -22,13 +29,12 @@ const getBudgetLabel = (budgets: Budget[], bid: string) => {
   return budgets.find(({ id }) => id == bid)?.label || "Label not found";
 };
 
-const ExpenseTable: React.FC<ExpenseTableProps> = ({ project, onChange }) => {
-  const { id: pid, expenses } = project;
+const ExpenseTable: React.FC<ExpenseTableProps> = (props) => {
+  const { pid, budgets, expenses, onChange } = props;
 
-  const getBudgetLabelCb = useCallback(
-    getBudgetLabel.bind(null, project.budget.budgets),
-    [project.budget.budgets]
-  );
+  const getBudgetLabelCb = useCallback(getBudgetLabel.bind(null, budgets), [
+    budgets,
+  ]);
 
   const handleDeleteClick = (expenseId: string) => {
     ProjectService.removeExpense(pid, expenseId);

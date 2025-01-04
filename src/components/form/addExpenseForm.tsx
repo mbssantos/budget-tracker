@@ -1,11 +1,12 @@
 import { Button } from "@/components/button";
 import { Headline, Text } from "@/components/text";
+import { getBudgetOptions } from "@/features/projects/project/expenses/expenseList/helpers";
 import { Expense, Project } from "@/features/projects/types";
 import { Tag } from "@/features/tags/types";
 import { generateId } from "@/utils/generateId";
 import { inputHandler, inputHandlerNumber } from "@/utils/inputHandlers";
 import { FormEventHandler, useMemo, useState } from "react";
-import Select, { SelectOption } from "../input/select/select";
+import Select from "../input/select/select";
 import { Message } from "../message";
 import styles from "./formStyles.module.css";
 import FormTags from "./formTags";
@@ -50,16 +51,10 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, project }) => {
     }, budgetAmount?.amount || 0);
   }, [budgetId]);
 
-  const budgetSelectOptions = useMemo(() => {
-    const opts = budgets.map(
-      ({ id: value, label }) => ({ value, label } as SelectOption<string>)
-    );
-
-    // add unselected as first option
-    opts.unshift({ label: "-", value: "-1" });
-
-    return opts;
-  }, [budgets]);
+  const budgetSelectOptions = useMemo(
+    () => getBudgetOptions(budgets),
+    [budgets]
+  );
 
   const handleClear = () => {
     setTags([]);
@@ -118,6 +113,7 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, project }) => {
               Amount
               <input
                 min={0}
+                step="0.001"
                 type="number"
                 placeholder="Amount"
                 value={amount}
@@ -137,6 +133,7 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, project }) => {
             <Text Tag="label">
               Budget source
               <Select
+                required
                 value={budgetId}
                 options={budgetSelectOptions}
                 onChange={inputHandler(setBudgetId)}

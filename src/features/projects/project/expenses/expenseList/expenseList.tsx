@@ -1,11 +1,13 @@
+import { Select } from "@/components/input/select";
 import Message from "@/components/message/message";
 import { Text } from "@/components/text";
 import { Expense, Project } from "@/features/projects/types";
 import { inputHandler } from "@/utils/inputHandlers";
 import { FilterList } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./expenseList.module.css";
 import ExpenseTable from "./expenseTable";
+import { getBudgetOptions, getTagOptions } from "./helpers";
 
 type ExpenseListProps = {
   /**
@@ -20,12 +22,14 @@ type ExpenseListProps = {
 };
 
 const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
-  const { expenses } = project;
+  const { expenses, budget } = project;
+  const { budgets } = budget;
 
   const [nameFilter, setNameFilter] = useState("");
   const [fromDate, setFromDate] = useState("");
   const [upToDate, setUpToDate] = useState("");
-
+  const [budgetId, setBudgetId] = useState("");
+  const [tagId, setTagId] = useState("");
   const [filteredExpenses, setFilteredExpenses] = useState<Expense[]>([]);
 
   useEffect(() => {
@@ -48,9 +52,22 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
       results = results.filter(({ dueDate }) => dueDate <= unixDate);
     }
 
+    if (tagId) {
+      results = results.filter(({ tags }) =>
+        tags.some(({ id }) => id === tagId)
+      );
+    }
+
+    if (budgetId) {
+      results = results.filter(({ budgetId: bid }) => bid === budgetId);
+    }
+
     setFilteredExpenses(results);
     // filter expenses when filters change
-  }, [expenses, nameFilter, fromDate, upToDate]);
+  }, [expenses, nameFilter, fromDate, upToDate, tagId, budgetId]);
+
+  const tagOptions = useMemo(() => getTagOptions(expenses), [expenses]);
+  const budgetOptions = useMemo(() => getBudgetOptions(budgets), [budgets]);
 
   return (
     <div className={styles.expenseList}>
@@ -84,6 +101,22 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
               onChange={inputHandler(setUpToDate)}
             />
           </Text>
+          <Text Tag="label">
+            Tags
+            <Select
+              value={tagId}
+              options={tagOptions}
+              onChange={inputHandler(setTagId)}
+            />
+          </Text>
+          <Text Tag="label">
+            Tags
+            <Select
+              value={budgetId}
+              options={budgetOptions}
+              onChange={inputHandler(setBudgetId)}
+            />
+          </Text>
         </div>
 
         {expenses.length === 0 && (
@@ -104,7 +137,12 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
       </div>
 
       {filteredExpenses.length > 0 && (
-        <ExpenseTable project={project} onChange={onChange} />
+        <ExpenseTable
+          pid={project.id}
+          onChange={onChange}
+          budgets={project.budget.budgets}
+          expenses={filteredExpenses}
+        />
       )}
     </div>
   );

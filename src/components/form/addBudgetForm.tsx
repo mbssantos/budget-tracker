@@ -72,6 +72,7 @@ const AddBudgetForm: React.FC<AddBudgetFormProps> = ({ onAdd }) => {
             Amount
             <input
               min={0}
+              step="0.001"
               type="number"
               placeholder="Amount"
               value={amount}
