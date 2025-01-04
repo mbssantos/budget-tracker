@@ -1,4 +1,3 @@
-import { generateId } from "@/utils/generateId";
 import { LocalStorageService } from "@/utils/localStorageService";
 import { Budget, CreateProject, Expense, Project } from "./types";
 
@@ -119,7 +118,7 @@ const ProjectService = {
    * @param pid project ID
    * @param expense the expense to add
    */
-  addExpense(pid: string, expense: Omit<Expense, "id">) {
+  addExpense(pid: string, expense: Expense) {
     // get latest data from storage
     const project = lss.getById(pid);
 
@@ -129,10 +128,7 @@ const ProjectService = {
     }
 
     // add expense to project
-    project.expenses.push({
-      id: generateId(),
-      ...expense,
-    });
+    project.expenses.push(expense);
 
     // sort expenses by due date
     project.expenses = project.expenses.sort((a, b) => a.dueDate - b.dueDate);

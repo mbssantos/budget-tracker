@@ -1,10 +1,8 @@
-import AddExpenseForm, {
-  OnAddExpenseProps,
-} from "@/components/form/expensesForm";
+import AddExpenseForm from "@/components/form/expensesForm";
 import { Headline } from "@/components/text";
 import { useCallback } from "react";
 import ProjectService from "../../projectsService";
-import { Project } from "../../types";
+import { Expense, Project } from "../../types";
 import { ExpenseList } from "./expenseList";
 
 type ProjectExpensesProps = {
@@ -20,13 +18,8 @@ type ProjectExpensesProps = {
  */
 const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
   const handleAddExpense = useCallback(
-    ({ date, ...data }: OnAddExpenseProps) => {
-      // assume form validation catches all user errors
-      ProjectService.addExpense(project.id, {
-        ...data,
-        isPayed: false,
-        dueDate: new Date(date).getTime(),
-      });
+    (expense: Expense) => {
+      ProjectService.addExpense(project.id, expense);
       onChange();
     },
     [project.id, onChange]
@@ -40,7 +33,11 @@ const Expenses: React.FC<ProjectExpensesProps> = ({ project, onChange }) => {
         </div>
         <ExpenseList project={project} onChange={onChange} />
       </div>
-      <AddExpenseForm onAdd={handleAddExpense} />
+
+      <AddExpenseForm
+        onAdd={handleAddExpense}
+        budgets={project.budget.budgets}
+      />
     </>
   );
 };

@@ -2,22 +2,15 @@ import { Button } from "@/components/button";
 import { Table } from "@/components/table";
 import { Text } from "@/components/text";
 import ProjectService from "@/features/projects/projectsService";
-import { Expense } from "@/features/projects/types";
+import { Budget, Project } from "@/features/projects/types";
 import { getColorFromString } from "@/utils/getColorFromString";
 import { getFormattedDate } from "@/utils/getFormattedDate";
 import { DeleteForever } from "@mui/icons-material";
+import { useCallback } from "react";
 import styles from "./expenseTable.module.css";
 
 type ExpenseTableProps = {
-  /**
-   * Project id
-   */
-  pid: string;
-
-  /**
-   * Expenses id
-   */
-  expenses: Expense[];
+  project: Project;
 
   /**
    * Notify parent when something relevant happens
@@ -25,17 +18,24 @@ type ExpenseTableProps = {
   onChange: () => void;
 };
 
-const ExpenseTable: React.FC<ExpenseTableProps> = ({
-  pid,
-  expenses,
-  onChange,
-}) => {
+const getBudgetLabel = (budgets: Budget[], bid: string) => {
+  return budgets.find(({ id }) => id == bid)?.label || "Label not found";
+};
+
+const ExpenseTable: React.FC<ExpenseTableProps> = ({ project, onChange }) => {
+  const { id: pid, expenses } = project;
+
+  const getBudgetLabelCb = useCallback(
+    getBudgetLabel.bind(null, project.budget.budgets),
+    [project.budget.budgets]
+  );
+
   const handleDeleteClick = (expenseId: string) => {
     ProjectService.removeExpense(pid, expenseId);
     onChange();
   };
 
-  const handleIsPayedChange = (expenseId: string) => {
+  const handleIsPaidChange = (expenseId: string) => {
     const expense = expenses.find(({ id }) => expenseId === id);
 
     if (!expense) {
@@ -44,15 +44,17 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({
 
     ProjectService.updateExpense(pid, {
       ...expense,
-      // toggle payed flag
-      isPayed: !expense.isPayed,
+      // toggle paid flag
+      isPaid: !expense.isPaid,
     });
 
     onChange();
   };
 
   return (
-    <Table th={["Name", "Amount", "Due date", "is payed", "tags", "Delete"]}>
+    <Table
+      th={["Name", "Amount", "Budget", "Due date", "is paid", "tags", "Delete"]}
+    >
       {expenses.map((expense) => (
         <tr key={expense.id}>
           <td>
@@ -62,14 +64,17 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({
             <Text>{expense.amount}</Text>
           </td>
           <td>
+            <Text>{getBudgetLabelCb(expense.budgetId)}</Text>
+          </td>
+          <td>
             <Text>{getFormattedDate(expense.dueDate)}</Text>
           </td>
           <td className="center">
             <Text size={2}>
               <input
                 type="checkbox"
-                checked={expense.isPayed}
-                onChange={handleIsPayedChange.bind(null, expense.id)}
+                checked={expense.isPaid}
+                onChange={handleIsPaidChange.bind(null, expense.id)}
               />
             </Text>
           </td>

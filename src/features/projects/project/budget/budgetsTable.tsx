@@ -4,17 +4,30 @@ import { Table } from "@/components/table";
 import Tag from "@/components/tag/tag";
 import { Text } from "@/components/text";
 import { DeleteForever } from "@mui/icons-material";
-import { Budget } from "../../types";
+import { useMemo } from "react";
+import { Project } from "../../types";
 
 type BudgetsTableProps = {
-  budgets: Budget[];
+  project: Project;
   onDelete: (id: string) => void;
 };
 
 export const BudgetsTable: React.FC<BudgetsTableProps> = ({
-  budgets,
+  project,
   onDelete,
 }) => {
+  const {
+    budget: { budgets },
+    expenses,
+  } = project;
+
+  const deletableBudgets = useMemo(() => {
+    const budgetIdsInUse = expenses.map(({ budgetId }) => budgetId);
+    return budgets
+      .filter(({ id }) => !budgetIdsInUse.includes(id))
+      .map(({ id }) => id);
+  }, [budgets, expenses]);
+
   return (
     <>
       {budgets.length === 0 && (
@@ -41,7 +54,10 @@ export const BudgetsTable: React.FC<BudgetsTableProps> = ({
                 ))}
               </td>
               <td>
-                <Button onClick={onDelete.bind(null, budget.id)}>
+                <Button
+                  onClick={onDelete.bind(null, budget.id)}
+                  disabled={!deletableBudgets.includes(budget.id)}
+                >
                   <Text size={2}>
                     <DeleteForever />
                   </Text>

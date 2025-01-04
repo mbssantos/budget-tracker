@@ -5,6 +5,7 @@ import { Headline } from "@/components/text";
 import { useCallback, useEffect, useState } from "react";
 import ProjectService from "../projectsService";
 import { Project as ProjectType } from "../types";
+import { Budget } from "./budget";
 import Expenses from "./expenses/expenses";
 import { Overview } from "./overview";
 
@@ -43,6 +44,7 @@ const Project: React.FC<ProjectProps> = ({ id }) => {
 
       <Overview project={project} onChange={fetchProject} />
       <Expenses project={project} onChange={fetchProject} />
+      <Budget project={project} onChange={fetchProject} />
     </section>
   );
 };

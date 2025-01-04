@@ -14,8 +14,13 @@ export type Expense = {
   name: string;
   dueDate: number;
   amount: number;
-  isPayed: boolean;
+  isPaid: boolean;
   // Note: Adding a payment date would be nice
+
+  /**
+   * Budget from which this expense will be subtracted from
+   */
+  budgetId: string;
 };
 
 export type Budget = {

@@ -55,40 +55,44 @@ const AddBudgetForm: React.FC<AddBudgetFormProps> = ({ onAdd }) => {
 
   return (
     <div className={styles.newExpenseFormWrapper}>
-      <form className={styles.newExpenseForm} onSubmit={handleSubmit}>
-        <Headline level={4} className="m-b-24">
-          Add budget
-        </Headline>
-        <Text Tag="label">
-          Name
-          <input
-            type="text"
-            required
-            value={label}
-            placeholder="Name"
-            onChange={inputHandler(setLabel)}
-          />
-        </Text>
-        <Text Tag="label">
-          Amount
-          <input
-            min={0}
-            type="number"
-            placeholder="Amount"
-            value={amount}
-            onChange={inputHandlerNumber(setAmount)}
-          />
-        </Text>
+      <div className="mw-full">
+        <form className={styles.newExpenseForm} onSubmit={handleSubmit}>
+          <Headline level={3}>Add budget</Headline>
+          <Text Tag="label">
+            Name
+            <input
+              type="text"
+              required
+              value={label}
+              placeholder="Name"
+              onChange={inputHandler(setLabel)}
+            />
+          </Text>
+          <Text Tag="label">
+            Amount
+            <input
+              min={0}
+              type="number"
+              placeholder="Amount"
+              value={amount}
+              onChange={inputHandlerNumber(setAmount)}
+            />
+          </Text>
 
-        <FormTags tags={tags} onAdd={handleAddTag} onRemove={handleRemoveTag} />
+          <FormTags
+            tags={tags}
+            onAdd={handleAddTag}
+            onRemove={handleRemoveTag}
+          />
 
-        <div className={styles.buttonWrapper}>
-          <Button level={2} type="button" onClick={handleClear}>
-            clear
-          </Button>
-          <Button level={1}>Add</Button>
-        </div>
-      </form>
+          <div className={styles.buttonWrapper}>
+            <Button level={2} type="button" onClick={handleClear}>
+              clear
+            </Button>
+            <Button level={1}>Add</Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEvent } from "react";
 
 export const inputHandler = (setter: (value: string) => void) => {
-  const handler: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setter(e.currentTarget.value);
   };
 

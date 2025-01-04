@@ -1,23 +1,21 @@
 import { Button } from "@/components/button";
 import { Headline, Text } from "@/components/text";
+import { Budget, Expense } from "@/features/projects/types";
 import { Tag } from "@/features/tags/types";
+import { generateId } from "@/utils/generateId";
 import { inputHandler, inputHandlerNumber } from "@/utils/inputHandlers";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useMemo, useState } from "react";
+import Select, { SelectOption } from "../input/select/select";
 import styles from "./formStyles.module.css";
 import FormTags from "./formTags";
 
-export type OnAddExpenseProps = {
-  name: string;
-  date: string;
-  amount: number;
-  tags: Tag[];
-};
-
 type NewExpenseFormProps = {
   /**
-   * Notify parent when something relevant happens
+   * Notify parent when expense is added
    */
-  onAdd: (props: OnAddExpenseProps) => void;
+  onAdd: (props: Expense) => void;
+
+  budgets: Pick<Budget, "id" | "label">[];
 };
 
 /**
@@ -25,22 +23,42 @@ type NewExpenseFormProps = {
  *
  * @returns
  */
-const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd }) => {
+const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, budgets }) => {
   const [name, setName] = useState("");
-  const [date, setDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const [amount, setAmount] = useState(0);
+  const [budgetId, setBudgetId] = useState("");
   const [tags, setTags] = useState<Tag[]>([]);
 
+  const budgetSelectOptions = useMemo(() => {
+    const opts = budgets.map(
+      ({ id: value, label }) => ({ value, label } as SelectOption<string>)
+    );
+
+    // add unselected as first option
+    opts.unshift({ label: "-", value: "-1" });
+
+    return opts;
+  }, [budgets]);
+
   const handleClear = () => {
-    setName("");
-    setDate("");
-    setAmount(0);
     setTags([]);
+    setName("");
+    setAmount(0);
+    setDueDate("");
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    onAdd({ name, tags, date, amount });
+    onAdd({
+      id: generateId(),
+      name,
+      tags,
+      amount,
+      budgetId,
+      isPaid: false,
+      dueDate: new Date(dueDate).getTime(),
+    });
   };
 
   const handleAddTag = (tag: Tag) => {
@@ -91,8 +109,17 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd }) => {
               <input
                 required
                 type="date"
-                value={date}
-                onChange={inputHandler(setDate)}
+                value={dueDate}
+                onChange={inputHandler(setDueDate)}
+              />
+            </Text>
+
+            <Text Tag="label">
+              Budget source
+              <Select
+                value={budgetId}
+                options={budgetSelectOptions}
+                onChange={inputHandler(setBudgetId)}
               />
             </Text>
 

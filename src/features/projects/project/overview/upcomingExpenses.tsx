@@ -37,12 +37,12 @@ const UpcomingExpenses: React.FC<UpcomingExpensesProps> = ({ expenses }) => {
   const currentDate = Date.now();
 
   const overdue = expenses.filter(
-    ({ isPayed, dueDate }) => !isPayed && dueDate < currentDate
+    ({ isPaid, dueDate }) => !isPaid && dueDate < currentDate
   );
 
   const upcoming = expenses.filter(
-    ({ isPayed, dueDate }) =>
-      !isPayed && dueDate < dueTimestamp && dueDate > currentDate
+    ({ isPaid, dueDate }) =>
+      !isPaid && dueDate < dueTimestamp && dueDate > currentDate
   );
 
   const content = [];

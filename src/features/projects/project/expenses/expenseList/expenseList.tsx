@@ -20,7 +20,7 @@ type ExpenseListProps = {
 };
 
 const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
-  const { id: pid, expenses } = project;
+  const { expenses } = project;
 
   const [nameFilter, setNameFilter] = useState("");
   const [fromDate, setFromDate] = useState("");
@@ -104,11 +104,7 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
       </div>
 
       {filteredExpenses.length > 0 && (
-        <ExpenseTable
-          expenses={filteredExpenses}
-          onChange={onChange}
-          pid={pid}
-        />
+        <ExpenseTable project={project} onChange={onChange} />
       )}
     </div>
   );
