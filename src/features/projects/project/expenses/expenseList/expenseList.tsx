@@ -110,7 +110,7 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ project, onChange }) => {
             />
           </Text>
           <Text Tag="label">
-            Tags
+            Budget
             <Select
               value={budgetId}
               options={budgetOptions}
