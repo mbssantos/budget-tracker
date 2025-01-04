@@ -4,12 +4,27 @@ import { Button } from "@/components/button";
 import AddBudgetForm from "@/components/form/budgetForm";
 import { Headline, Text } from "@/components/text";
 import useLocale from "@/hooks/useLocale";
+import { generateId } from "@/utils/generateId";
 import { inputHandler } from "@/utils/inputHandlers";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import ProjectService from "../../projectsService";
-import { Budget } from "../../types";
+import { Budget, Project } from "../../types";
 import BudgetsTable from "../budget/budgetsTable";
+
+const getMockProject = (): Project => {
+  return {
+    id: generateId(),
+    title: "",
+    expenses: [],
+    createdAt: Date.now(),
+    budget: {
+      total: 0,
+      remainingBudget: 0,
+      budgets: [],
+    },
+  };
+};
 
 /**
  * Create project
@@ -18,13 +33,12 @@ import BudgetsTable from "../budget/budgetsTable";
 export const NewProject = ({}) => {
   const locale = useLocale();
   const router = useRouter();
-  const [title, setTitle] = useState("");
-  const [budgets, setBudgets] = useState<Budget[]>([]);
 
-  const totalBudget = useMemo(
-    () => budgets.reduce((acc, { amount }) => acc + amount, 0),
-    [budgets]
-  );
+  const [project, setProject] = useState(getMockProject());
+
+  // deconstruct for easy access
+  const { title, budget } = project;
+  const { budgets } = project.budget;
 
   const handleCreateProject = useCallback(() => {
     const [{ id }] = ProjectService.create({
@@ -33,6 +47,15 @@ export const NewProject = ({}) => {
     });
     router.push(`/${locale}/projects/${id}`);
   }, [title, budgets, router]);
+
+  const setTitle = (title: string) => {
+    setProject({ ...project, title });
+  };
+
+  const totalBudget = useMemo(
+    () => budgets.reduce((acc, { amount }) => acc + amount, 0),
+    [budgets]
+  );
 
   const handleDeleteBudget = useCallback(
     (budgetId: string) => {
@@ -43,23 +66,29 @@ export const NewProject = ({}) => {
       }
 
       // shallow copy array
-      const shallow = [...budgets];
+      const newBudgets = [...budgets];
 
       // remove by index
-      shallow.splice(index, 1);
+      newBudgets.splice(index, 1);
 
       // update UI
-      setBudgets(shallow);
+      setProject({
+        ...project,
+        budget: { ...budget, budgets: newBudgets },
+      });
     },
-    [budgets, setBudgets]
+    [budgets, setProject]
   );
 
   const handleAddBudget = useCallback(
     (budgetSource: Budget) => {
       // assume form validation catches all user errors
-      setBudgets([...budgets, budgetSource]);
+      setProject({
+        ...project,
+        budget: { ...budget, budgets: [...budgets, budgetSource] },
+      });
     },
-    [budgets, setBudgets]
+    [budgets, setProject]
   );
 
   return (
@@ -82,7 +111,7 @@ export const NewProject = ({}) => {
         Budgets
       </Headline>
 
-      <BudgetsTable budgets={budgets} onDelete={handleDeleteBudget} />
+      <BudgetsTable project={project} onDelete={handleDeleteBudget} />
 
       <Headline level={4} className="m-t-24 m-b-24">
         Total project budget: {totalBudget}

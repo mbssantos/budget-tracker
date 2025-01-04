@@ -28,6 +28,25 @@ export const BudgetsTable: React.FC<BudgetsTableProps> = ({
       .map(({ id }) => id);
   }, [budgets, expenses]);
 
+  const getRemainingAmount = useMemo(() => {
+    const expenseMap = expenses.reduce((acc, expense) => {
+      if (acc[expense.budgetId] === undefined) {
+        acc[expense.budgetId] = 0;
+      }
+
+      acc[expense.budgetId] += expense.amount;
+
+      return acc;
+    }, {} as { [key: string]: number });
+
+    return (budgetId: string) => {
+      const budgetAmount =
+        budgets.find(({ id }) => id === budgetId)?.amount || 0;
+
+      return budgetAmount - (expenseMap[budgetId] || 0);
+    };
+  }, [budgets, expenses]);
+
   return (
     <>
       {budgets.length === 0 && (
@@ -39,7 +58,7 @@ export const BudgetsTable: React.FC<BudgetsTableProps> = ({
       )}
 
       {budgets.length > 0 && (
-        <Table th={["Name", "Amount", "Tags", "Delete"]}>
+        <Table th={["Name", "Amount", "Remaining", "Tags", "Delete"]}>
           {budgets.map((budget) => (
             <tr key={budget.id}>
               <td>
@@ -47,6 +66,9 @@ export const BudgetsTable: React.FC<BudgetsTableProps> = ({
               </td>
               <td>
                 <Text>{budget.amount}</Text>
+              </td>
+              <td>
+                <Text>{getRemainingAmount(budget.id)}</Text>
               </td>
               <td>
                 {budget.tags.map((tag) => (
