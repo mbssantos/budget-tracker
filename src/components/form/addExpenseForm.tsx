@@ -74,6 +74,9 @@ const AddExpenseForm: React.FC<NewExpenseFormProps> = ({ onAdd, project }) => {
       isPaid: false,
       dueDate: new Date(dueDate).getTime(),
     });
+
+    // clear the amount to avoid flashing the over budget message
+    setAmount(0);
   };
 
   const handleAddTag = (tag: Tag) => {
