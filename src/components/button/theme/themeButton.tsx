@@ -1,5 +1,4 @@
 import { Headline } from "@/components/text";
-import useLocale from "@/hooks/useLocale";
 import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
 import SettingsSystemDaydream from "@mui/icons-material/SettingsSystemDaydream";
@@ -28,7 +27,6 @@ const getStoredTheme = (): Theme => {
 const ThemeButton: React.FC = () => {
   const [theme, setTheme] = useState<Theme | null>(null);
 
-  const locale = useLocale();
   const isDarkTheme = theme === "dark";
   const isLightTheme = theme === "light";
   const isSystemTheme = theme === "system";

@@ -1,6 +1,5 @@
 import { Link } from "@/components/link";
 import { Headline, Text } from "@/components/text";
-import useLocale from "@/hooks/useLocale";
 import BusinessCenter from "@mui/icons-material/BusinessCenter";
 import { Project } from "../../features/projects/types";
 import styles from "./projectCard.module.css";
@@ -15,7 +14,6 @@ const getBudgetLabel = (remainingBudgetPercentage: number) => {
 
 const ProjectCard: React.FC<Project> = (project) => {
   const { id, title, budget } = project;
-  const locale = useLocale();
 
   const remainingBudgetPercentage = Math.round(
     (budget.remainingBudget / Math.max(budget.total, 1)) * 100

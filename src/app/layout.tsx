@@ -1,6 +1,5 @@
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { PageProps } from "@/types";
 import type { Metadata } from "next";
 import Head from "next/head";
 import "./globals.css";
@@ -15,26 +14,22 @@ export const metadata: Metadata = {
   },
 };
 
-type RootLayout = Readonly<
-  PageProps & {
-    children: React.ReactNode;
-  }
->;
+type RootLayout = Readonly<{
+  children: React.ReactNode;
+}>;
 
-async function RootLayout({ params, children }: RootLayout) {
-  const locale = (await params).lang;
-
+async function RootLayout({ children }: RootLayout) {
   return (
-    <html lang={locale}>
+    <html lang="en">
       <Head>
         <link rel="icon" href="/favicon.ico?v=2" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
       </Head>
 
       <body>
-        <Header locale={locale} />
+        <Header />
         {children}
-        <Footer locale={locale} />
+        <Footer />
       </body>
     </html>
   );

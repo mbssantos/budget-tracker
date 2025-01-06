@@ -2,7 +2,7 @@ import { Card, CardList } from "@/components/cardList";
 import { Headline } from "@/components/text";
 import CmsService from "@/features/cms/cmsService";
 import { LatestProjects } from "@/features/projects/latestProjects";
-import { GenMetadata, PageProps } from "@/types";
+import { GenMetadata } from "@/types";
 
 export const generateMetadata: GenMetadata = () => {
   return {
@@ -15,8 +15,7 @@ export const generateMetadata: GenMetadata = () => {
  * Landing / Home page
  * @returns
  */
-export default async function Home({ params }: PageProps) {
-  const { lang } = await params;
+export default async function Home() {
   const cards = await CmsService.getLatestArticlesCards();
 
   return (

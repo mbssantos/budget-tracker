@@ -2,7 +2,6 @@
 
 import MainNav from "@/features/nav/mainNav";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { WithLocale } from "@/types";
 import SettingsIcon from "@mui/icons-material/Settings";
 import cx from "classnames";
 import { useMemo, useState } from "react";
@@ -17,7 +16,7 @@ import { Settings } from "./settings";
 /**
  * Main navigation component
  */
-const Header: React.FC<WithLocale> = ({ locale }) => {
+const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 

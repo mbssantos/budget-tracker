@@ -3,7 +3,6 @@
 import { Button } from "@/components/button";
 import AddBudgetForm from "@/components/form/addBudgetForm";
 import { Headline, Text } from "@/components/text";
-import useLocale from "@/hooks/useLocale";
 import { generateId } from "@/utils/generateId";
 import { inputHandler } from "@/utils/inputHandlers";
 import { useRouter } from "next/navigation";
@@ -31,9 +30,7 @@ const getMockProject = (): Project => {
  * @returns
  */
 export const NewProject = ({}) => {
-  const locale = useLocale();
   const router = useRouter();
-
   const [project, setProject] = useState(getMockProject());
 
   // deconstruct for easy access

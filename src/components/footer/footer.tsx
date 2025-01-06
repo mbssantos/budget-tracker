@@ -1,9 +1,8 @@
-import { WithLocale } from "@/types";
 import { Link } from "../link";
 import { Headline, Text } from "../text";
 import styles from "./footer.module.css";
 
-const Footer: React.FC<WithLocale> = ({ locale }) => {
+const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerInner}>

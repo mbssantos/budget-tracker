@@ -1,13 +1,12 @@
 import { Project } from "@/features/projects/project";
-import { PageProps } from "@/types";
 
 type ProjectPageProps = {
-  slug: string;
+  params: Promise<{
+    slug: string;
+  }>;
 };
 
-export default async function ProjectPage({
-  params,
-}: PageProps<ProjectPageProps>) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
 
   return (

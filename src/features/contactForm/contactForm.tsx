@@ -113,8 +113,8 @@ const ContactForm: React.FC = () => {
           <div className="center m-16 m-b-24">
             {hasSubmitted && (
               <Text size={3}>
-                Thanks for getting in touch, we'll get back to you as soon as
-                possible.
+                Thanks for getting in touch, we&apos;ll get back to you as soon
+                as possible.
               </Text>
             )}
             {error && <Text size={3}>{error}</Text>}

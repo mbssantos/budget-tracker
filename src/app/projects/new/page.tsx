@@ -1,11 +1,10 @@
 import { NewProject } from "@/features/projects/project/newProject";
-import { PageProps } from "@/types";
 
 /**
  * Create project page
  * @returns
  */
-export default function NewProjectPage({}: PageProps) {
+export default function NewProjectPage({}) {
   return (
     <main className="mw-full">
       <NewProject />

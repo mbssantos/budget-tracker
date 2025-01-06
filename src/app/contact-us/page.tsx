@@ -1,6 +1,6 @@
 import { Headline, Text } from "@/components/text";
 import { ContactForm } from "@/features/contactForm";
-import { GenMetadata, PageProps } from "@/types";
+import { GenMetadata } from "@/types";
 
 export const generateMetadata: GenMetadata = ({}) => {
   return {
@@ -9,7 +9,7 @@ export const generateMetadata: GenMetadata = ({}) => {
   };
 };
 
-const ContactUsPage: React.FC<PageProps> = async () => {
+const ContactUsPage: React.FC = async () => {
   return (
     <section className="grid mw-68">
       <Headline className="center m-16 m-b-24" level={1}>

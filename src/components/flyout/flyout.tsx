@@ -1,4 +1,3 @@
-import useLocale from "@/hooks/useLocale";
 import CloseIcon from "@mui/icons-material/Close";
 import cx from "classnames";
 import { IconButton } from "../button/icon";
@@ -12,24 +11,12 @@ export type FlyoutProps = {
   children: React.ReactNode;
 };
 
-const translations = {
-  en: {
-    close: "Close",
-  },
-  pt: {
-    close: "Fechar",
-  },
-};
-
 const Flyout: React.FC<FlyoutProps> = ({
   label,
   isOpen,
   children,
   onCloseClick,
 }) => {
-  const locale = useLocale();
-  const keys = translations[locale];
-
   return (
     <section
       className={cx(styles.flyout, {
@@ -43,7 +30,7 @@ const Flyout: React.FC<FlyoutProps> = ({
       >
         <div className={styles.header}>
           <Text>{label}</Text>
-          <IconButton size={1} label={keys.close} onClick={onCloseClick}>
+          <IconButton size={1} label="Close" onClick={onCloseClick}>
             <CloseIcon />
           </IconButton>
         </div>
