@@ -119,6 +119,7 @@ label {
 
 input[type=""],
 input[type="text"],
+input[type="email"],
 input[type="date"],
 input[type="number"],
 textarea {
@@ -133,4 +134,9 @@ textarea {
   font-size: inherit;
   min-height: 20rem;
   resize: vertical;
+}
+
+.grid {
+  margin: var(--spacing-48) auto;
+  max-width: var(--max-width);
 }

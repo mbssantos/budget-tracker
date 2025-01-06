@@ -38,23 +38,4 @@ const englishEntries = [
   ],
 ];
 
-const portugueseEntries = [
-  [
-    "Dominando Orçamentos de Projetos: Um Guia Passo a Passo",
-    "Aprenda a planejar, alocar e gerenciar recursos de forma eficaz para manter seu projeto no caminho certo e dentro do orçamento.",
-    "img1",
-  ],
-  [
-    "Erros Comuns em Orçamentos de Projetos e Como Evitá-los",
-    "Descubra armadilhas frequentes no orçamento de projetos e dicas práticas para evitar gastos excessivos e má gestão de recursos.",
-    "img2",
-  ],
-  [
-    "A Arte de Estimar Custos de Projetos com Precisão",
-    "Aprimore suas habilidades de estimativa de custos com métodos comprovados para prever despesas de projetos e minimizar surpresas.",
-    "img3",
-  ],
-];
-
-export const enArticleMocks = englishEntries.map(generateMock);
-export const ptArticleMocks = portugueseEntries.map(generateMock);
+export const articleMocks = englishEntries.map(generateMock);

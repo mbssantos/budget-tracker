@@ -29,7 +29,7 @@ const ProjectCard: React.FC<Project> = (project) => {
   return (
     <div className={styles.projectCardWrapper}>
       <div className={styles.projectCard}>
-        <Link href={`/${locale}/projects/${id}`}>
+        <Link href={`/projects/${id}`}>
           <Headline level={3}>
             <div className={styles.icon}>
               <BusinessCenter />

@@ -46,7 +46,7 @@ export const NewProject = ({}) => {
       title: title.trim(),
       budgets,
     });
-    router.push(`/${locale}/projects/${id}`);
+    router.push(`/projects/${id}`);
   };
 
   const setTitle = (title: string) => {

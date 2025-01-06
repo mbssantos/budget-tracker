@@ -25,26 +25,10 @@ const getStoredTheme = (): Theme => {
   return config;
 };
 
-const translations = {
-  en: {
-    theme: "Theme",
-    dark: "Dark",
-    light: "Light",
-    sys: "System",
-  },
-  pt: {
-    theme: "Tema",
-    dark: "Escuro",
-    light: "Claro",
-    sys: "Sistema",
-  },
-};
-
 const ThemeButton: React.FC = () => {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   const locale = useLocale();
-  const keys = translations[locale];
   const isDarkTheme = theme === "dark";
   const isLightTheme = theme === "light";
   const isSystemTheme = theme === "system";
@@ -87,7 +71,7 @@ const ThemeButton: React.FC = () => {
   return (
     <>
       <Headline className="m-b-24" level={4}>
-        {keys.theme}
+        Theme
       </Headline>
       <div className={styles.themeButton}>
         <IconButton
@@ -98,7 +82,7 @@ const ThemeButton: React.FC = () => {
             [styles.active]: isLightTheme,
             [styles.noRightBorder]: isSystemTheme,
           })}
-          label={keys.light}
+          label="Light"
           suppressHydrationWarning
         >
           <LightMode />
@@ -112,7 +96,7 @@ const ThemeButton: React.FC = () => {
             [styles.noLeftBorder]: isLightTheme || isDarkTheme,
             [styles.noRightBorder]: isLightTheme || isDarkTheme,
           })}
-          label={keys.sys}
+          label="System"
         >
           <SettingsSystemDaydream />
         </IconButton>
@@ -124,7 +108,7 @@ const ThemeButton: React.FC = () => {
             [styles.active]: isDarkTheme,
             [styles.noLeftBorder]: isSystemTheme,
           })}
-          label={keys.dark}
+          label="Dark"
         >
           <DarkMode />
         </IconButton>

@@ -19,7 +19,7 @@ export type PageProps<T = unknown> = {
  */
 export type GenMetadata<T = unknown> = (
   props: PageProps<T>
-) => Promise<Metadata>;
+) => Metadata | Promise<Metadata>;
 
 /**
  * Inject locale to components

@@ -15,22 +15,9 @@ import Logo from "./icons/logo";
 import { Settings } from "./settings";
 
 /**
- * Lazy translations
- */
-const translations = {
-  en: {
-    settings: "Settings",
-  },
-  pt: {
-    settings: "Configurações",
-  },
-};
-
-/**
  * Main navigation component
  */
 const Header: React.FC<WithLocale> = ({ locale }) => {
-  const keys = translations[locale];
   const [isOpen, setIsOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -67,16 +54,16 @@ const Header: React.FC<WithLocale> = ({ locale }) => {
       >
         <div className={styles.content}>
           <div className={styles.main}>
-            <Link href={`/${locale}`}>
+            <Link href="/">
               <Headline level={3} className={styles.headline}>
                 <Logo />
               </Headline>
             </Link>
             <div className={cx("centered", styles.outliers)}>
-              <MainNav locale={locale} />
+              <MainNav />
               <IconButton
                 size={1}
-                aria-label={keys.settings}
+                aria-label={"Settings"}
                 onClick={handleClickSettingsBtn}
               >
                 <SettingsIcon />
@@ -86,11 +73,7 @@ const Header: React.FC<WithLocale> = ({ locale }) => {
         </div>
       </header>
       {/* Settings flyout */}
-      <Flyout
-        isOpen={isOpen}
-        label={keys.settings}
-        onCloseClick={handleCloseClick}
-      >
+      <Flyout isOpen={isOpen} label="Settings" onCloseClick={handleCloseClick}>
         <Settings />
       </Flyout>
     </>

@@ -3,15 +3,11 @@ import { Headline } from "@/components/text";
 import CmsService from "@/features/cms/cmsService";
 import { LatestProjects } from "@/features/projects/latestProjects";
 import { GenMetadata, PageProps } from "@/types";
-import { getDictionary } from "./dictionaries";
 
-export const generateMetadata: GenMetadata = async ({ params }) => {
-  const lang = (await params).lang;
-  const dict = await getDictionary(lang); // en
-
+export const generateMetadata: GenMetadata = () => {
   return {
-    title: dict.home.title,
-    description: dict.home.description,
+    title: "ECB budget Tracker",
+    description: "ECB budget Tracker description",
   };
 };
 
@@ -21,19 +17,16 @@ export const generateMetadata: GenMetadata = async ({ params }) => {
  */
 export default async function Home({ params }: PageProps) {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
-  const cards = await CmsService.getLatestArticlesCards(lang);
+  const cards = await CmsService.getLatestArticlesCards();
 
   return (
     <main>
-      <Headline className="center m-t-48 m-b-24">
-        {dict.global.budgetTracker}
-      </Headline>
+      <Headline className="center m-t-48 m-b-24">Budget Tracker</Headline>
       <LatestProjects />
 
       <div className="grid">
         <Headline level={2} className="center m-b-24">
-          {dict.articles.title}
+          Latest articles
         </Headline>
         <CardList>
           {cards.map(({ key, ...rest }) => (

@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Disallow: 
-
-# Host
-Host: https://cinergetica.pt
-
-# Sitemap
-Sitemap: https://cinergetica.pt/sitemap.xml

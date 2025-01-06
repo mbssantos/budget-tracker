@@ -47,7 +47,7 @@ const LatestProjects = () => {
           </CardList>
 
           <div className="center m-t-24">
-            <Link href={`/${locale}/projects/new`}>
+            <Link href={`/projects/new`}>
               <Button level={1}>Create project</Button>
             </Link>
           </div>

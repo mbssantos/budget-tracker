@@ -23,7 +23,7 @@ const Nav: React.FC<NavProps> = ({ items }) => {
     setIsOpen(!isOpen);
   };
 
-  const menuLabel = isOpen ? "Fechar" : "Menu";
+  const menuLabel = isOpen ? "Close" : "Menu";
   const MenuIcon = isOpen ? CloseMenuIcon : OpenMenuIcon;
 
   return (

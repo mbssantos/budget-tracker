@@ -3,10 +3,9 @@ import { Header } from "@/components/header";
 import { PageProps } from "@/types";
 import type { Metadata } from "next";
 import Head from "next/head";
-import "../globals.css";
-import "../grid.css";
-import "../typography.css";
-import "../variables.css";
+import "./globals.css";
+import "./typography.css";
+import "./variables.css";
 
 export const metadata: Metadata = {
   title: "Budget Tracker Exercise",
