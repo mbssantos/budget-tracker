@@ -1,4 +1,3 @@
-import Observable from "@/utils/observable";
 import debounce from "lodash/debounce";
 import { useEffect } from "react";
 
@@ -8,12 +7,9 @@ const getInitialState = () => {
   }
   return 0;
 };
+
 type ScrollDirection = "up" | "down" | undefined;
 
-const upObserver = new Observable();
-const downObserver = new Observable();
-
-let debHandleScroll: (() => void) | undefined;
 let prevScrollY = getInitialState();
 let scrollDirection: ScrollDirection;
 
@@ -41,19 +37,8 @@ export const useScrollDirection = ({
   onScrollUp,
 }: UseScrollProps) => {
   useEffect(() => {
-    upObserver.subscribe(onScrollUp);
-    downObserver.subscribe(onScrollDown);
-
-    if (debHandleScroll) {
-      return () => {
-        // ubsub from observers
-        upObserver.unsubscribe(onScrollUp);
-        downObserver.unsubscribe(onScrollDown);
-      };
-    }
-
-    // debounced handler to reduce processor load
-    debHandleScroll = debounce(
+    // debounced handler to reduce load
+    const debouncedScrollHandler = debounce(
       () => {
         const scrollY = window.scrollY;
         let diff = prevScrollY - scrollY;
@@ -66,10 +51,10 @@ export const useScrollDirection = ({
 
         if (diff < 0 && scrollDirection !== "down") {
           scrollDirection = "down";
-          downObserver.notify();
+          onScrollDown();
         } else if ((scrollY === 0 || diff > 0) && scrollDirection !== "up") {
           scrollDirection = "up";
-          upObserver.notify();
+          onScrollUp();
         }
 
         prevScrollY = scrollY;
@@ -78,9 +63,12 @@ export const useScrollDirection = ({
       { maxWait: 300 }
     );
 
-    window.addEventListener("scroll", debHandleScroll);
+    window.addEventListener("scroll", debouncedScrollHandler);
 
     return () =>
-      window.removeEventListener("scroll", debHandleScroll as () => void);
+      window.removeEventListener(
+        "scroll",
+        debouncedScrollHandler as () => void
+      );
   }, [onScrollUp, onScrollDown]);
 };
