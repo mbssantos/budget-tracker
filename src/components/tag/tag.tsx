@@ -12,7 +12,7 @@ const Tag: React.FC<TagProps> = ({ tag, onClick }) => {
       key={tag.id}
       className={styles.tag}
       onClick={onClick?.bind(null, tag)}
-      style={{ backgroundColor: getColorFromString(tag.id) }}
+      style={{ backgroundColor: getColorFromString(tag.label) }}
     >
       <Text>
         {tag.label}

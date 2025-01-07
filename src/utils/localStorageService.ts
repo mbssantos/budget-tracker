@@ -1,4 +1,4 @@
-import { encode } from "./base64";
+import { generateId } from "./generateId";
 
 type LocalStorageMap<T> = {
   [key: string]: T;
@@ -52,13 +52,17 @@ export class LocalStorageService<T extends K> {
    * @param data
    * @returns
    */
-  create(...data: Omit<T, "id" | "createdAt">[]) {
+  create(...data: Partial<T>[]) {
     // insert all items
-    return data.map((entry) => {
+    return data.map(({ id, ...entry }) => {
       // real DBs would use UUIDs or some such
-      const id = encode(`${Math.random()}`);
+      const newId = generateId(id);
 
-      return this.upsert(id, { id, createdAt: Date.now(), ...entry } as T);
+      return this.upsert(newId, {
+        id: newId,
+        createdAt: Date.now(),
+        ...entry,
+      } as T);
     });
   }
 

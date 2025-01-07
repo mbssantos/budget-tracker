@@ -1,9 +1,15 @@
 import { LocalStorageService } from "@/utils/localStorageService";
+import { defaultProjects } from "./defaultProjects";
 import { Budget, CreateProject, Expense, Project } from "./types";
 
 const LOCAL_STORAGE_KEY = "my-projects";
 
 const lss = new LocalStorageService<Project>(LOCAL_STORAGE_KEY);
+
+// if we're browse-side and add the list does not exist, add the default items
+if (typeof window !== "undefined" && !lss.exists()) {
+  lss.create(...defaultProjects);
+}
 
 /**
  * Calculates the total budget a project has

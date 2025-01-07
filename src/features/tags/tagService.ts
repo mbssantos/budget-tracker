@@ -1,7 +1,14 @@
 import { LocalStorageService } from "@/utils/localStorageService";
 import { Tag } from "./types";
 
-const proposedTags = ["consultancy", "licenses", "operations", "travel"];
+const proposedTags = [
+  "consultancy",
+  "licenses",
+  "operations",
+  "travel",
+  "General",
+  "Supplies",
+];
 
 const defaultTags: Tag[] = proposedTags.map((label) => ({
   id: label,
@@ -25,7 +32,7 @@ const TagService = {
   },
 
   create(label: string) {
-    return lss.create({ label });
+    return lss.create({ id: label, label });
   },
 
   search(dirtyNeedle: string, limit = 5) {

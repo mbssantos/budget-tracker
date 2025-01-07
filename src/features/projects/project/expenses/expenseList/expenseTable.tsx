@@ -1,13 +1,12 @@
 import { Button } from "@/components/button";
 import { Table } from "@/components/table";
+import Tag from "@/components/tag/tag";
 import { Text } from "@/components/text";
 import ProjectService from "@/features/projects/projectsService";
 import { Budget, Expense } from "@/features/projects/types";
-import { getColorFromString } from "@/utils/getColorFromString";
 import { getFormattedDate } from "@/utils/getFormattedDate";
 import { DeleteForever } from "@mui/icons-material";
 import { useCallback } from "react";
-import styles from "./expenseTable.module.css";
 
 type ExpenseTableProps = {
   /**
@@ -86,14 +85,8 @@ const ExpenseTable: React.FC<ExpenseTableProps> = (props) => {
             </Text>
           </td>
           <td>
-            {expense.tags.map(({ id, label }) => (
-              <Text
-                key={id}
-                className={styles.tag}
-                style={{ backgroundColor: getColorFromString(id) }}
-              >
-                {label}
-              </Text>
+            {expense.tags.map((tag) => (
+              <Tag key={`${expense.id}-${tag.id}`} tag={tag} />
             ))}
           </td>
           <td>
